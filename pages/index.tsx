@@ -1,18 +1,21 @@
 import { Container, Box } from "@mui/material";
 import type { NextPage } from "next";
+import SearchDAO from "../src/components/SearchDAO";
 
 const Home: NextPage = () => {
   return (
     <Container maxWidth="lg">
       <Box
         sx={{
-          my: 4,
+          height: "100vh",
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
         }}
-      ></Box>
+      >
+        <SearchDAO />
+      </Box>
     </Container>
   );
 };

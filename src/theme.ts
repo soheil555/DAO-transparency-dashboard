@@ -3,6 +3,9 @@ import { red } from "@mui/material/colors";
 
 const theme = createTheme({
   palette: {
+    background: {
+      default: "#F9F9F9",
+    },
     primary: {
       main: "#556cd6",
     },
