@@ -42,3 +42,6 @@ yarn-error.log*
 
 #chrome
 chrome-linux
+
+
+data.json
