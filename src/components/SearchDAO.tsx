@@ -1,9 +1,10 @@
 import { Box, TextField, Autocomplete } from "@mui/material";
 import { useState } from "react";
 import DAO from "./DAO";
+import { daos, DAO as DAOType } from "../../data";
 
 export default function SearchDAO() {
-  const [dao, setDAO] = useState<DAO | null>(null);
+  const [dao, setDAO] = useState<DAOType | null>(null);
 
   return (
     <Box
@@ -16,7 +17,7 @@ export default function SearchDAO() {
       }}
     >
       <Autocomplete
-        onChange={(event: any, value: DAO | null) => {
+        onChange={(event: any, value: DAOType | null) => {
           if (value && JSON.stringify(value) != JSON.stringify(dao)) {
             setDAO(value);
           }
@@ -25,6 +26,7 @@ export default function SearchDAO() {
         options={daos}
         fullWidth
         sx={{ mb: 2 }}
+        getOptionLabel={(option) => option.dao}
         renderInput={(params) => <TextField {...params} label="Search DAOS" />}
         renderOption={(props, option) => (
           <Box
@@ -32,7 +34,7 @@ export default function SearchDAO() {
             sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
             {...props}
           >
-            <img loading="lazy" width="20" src={option.logo} /> {option.label}
+            <img loading="lazy" width="20" src={option.image} /> {option.dao}
           </Box>
         )}
       />
@@ -41,23 +43,3 @@ export default function SearchDAO() {
     </Box>
   );
 }
-
-export interface DAO {
-  label: string;
-  logo: string;
-}
-
-const daos: readonly DAO[] = [
-  {
-    label: "BitDAO",
-    logo: "https://deepdao-uploads.s3.us-east-2.amazonaws.com/assets/snapshots/spaces/bitdao.eth.png",
-  },
-  {
-    label: "Uniswap",
-    logo: "https://deepdao-uploads.s3.us-east-2.amazonaws.com/assets/dao/logo/uniswap.png",
-  },
-  {
-    label: "Lido",
-    logo: "https://deepdao-uploads.s3.us-east-2.amazonaws.com/assets/snapshots/spaces/lido-snapshot.eth.png",
-  },
-];

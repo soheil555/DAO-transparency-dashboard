@@ -1,5 +1,4 @@
 {
-  "type": "module",
   "name": "dao-transparency-dashboard",
   "private": true,
   "scripts": {

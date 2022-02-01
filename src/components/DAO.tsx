@@ -1,5 +1,15 @@
-import { DAO as DAOType } from "./SearchDAO";
-import { Card, Typography, CardMedia, CardContent } from "@mui/material";
+import { DAO as DAOType } from "../../data";
+import {
+  Card,
+  Typography,
+  CardMedia,
+  CardContent,
+  Grow,
+  CardActions,
+  Button,
+} from "@mui/material";
+
+import { ArrowRight } from "@mui/icons-material";
 
 interface Props {
   dao: DAOType;
@@ -7,13 +17,23 @@ interface Props {
 
 export default function DAO({ dao }: Props) {
   return (
-    <Card sx={{ width: 345, maxWidth: 345 }}>
-      <CardMedia component="img" height="200" image={dao.logo} />
-      <CardContent>
-        <Typography variant="h5" component="div" gutterBottom>
-          {dao.label}
-        </Typography>
-      </CardContent>
-    </Card>
+    <Grow in={true}>
+      <Card sx={{ width: 345, maxWidth: 345 }}>
+        <CardMedia component="img" height="200" image={dao.image} />
+        <CardContent>
+          <Typography variant="h5" component="div" gutterBottom>
+            {dao.dao}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {dao.description}
+          </Typography>
+        </CardContent>
+        <CardActions sx={{ display: "flex", justifyContent: "flex-end" }}>
+          <Button endIcon={<ArrowRight />} variant="contained" size="medium">
+            Start Analayze
+          </Button>
+        </CardActions>
+      </Card>
+    </Grow>
   );
 }
