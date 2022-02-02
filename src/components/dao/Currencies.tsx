@@ -41,11 +41,13 @@ export default function Currencies({ address }: Props) {
   const numberFormatter = new Intl.NumberFormat();
 
   useEffect(() => {
+    dispatch({ type: "TOGGLE_DAO_TREASURY_LOADING" });
     covalentEth.getTokenBalances!(address).then((result) => {
       const items = result.data.items;
       setItems(items);
       const treasury = calcTreasury(items);
       dispatch({ type: "SET_DAO_TREASURY", payload: { treasury } });
+      dispatch({ type: "TOGGLE_DAO_TREASURY_LOADING" });
     });
   }, []);
 
@@ -53,7 +55,7 @@ export default function Currencies({ address }: Props) {
     <>
       {" "}
       {items ? (
-        <TableContainer sx={{ height: 400, width: 750 }} component={Paper}>
+        <TableContainer sx={{ height: 400 }} component={Paper}>
           <Table stickyHeader sx={{ minWidth: 700 }} aria-label="currencies">
             <TableHead>
               <TableRow>
@@ -112,12 +114,7 @@ export default function Currencies({ address }: Props) {
           </Table>
         </TableContainer>
       ) : (
-        <Skeleton
-          animation="wave"
-          variant="rectangular"
-          width={750}
-          height={400}
-        />
+        <Skeleton animation="wave" variant="rectangular" height={400} />
       )}
     </>
   );

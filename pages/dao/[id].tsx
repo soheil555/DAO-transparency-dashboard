@@ -1,25 +1,55 @@
-import { useRouter } from "next/router";
 import type { NextPage, GetServerSideProps } from "next";
-import { Container, Box } from "@mui/material";
+import { Container, Box, Grid, Paper } from "@mui/material";
 import { daos, DAO } from "../../data";
+import { styled } from "@mui/material/styles";
+import Currencies from "../../src/components/dao/Currencies";
+import Treasury from "../../src/components/dao/Treasury";
+import Info from "../../src/components/dao/Info";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 
 interface Props {
   dao: DAO;
 }
 
+const Item = styled(Paper)(({ theme }) => ({
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: "center",
+  color: theme.palette.text.secondary,
+}));
+
 const DAO: NextPage<Props> = ({ dao }) => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch({
+      type: "SET_DAO_INFO",
+      payload: {
+        name: dao.dao,
+        description: dao.description,
+        logo: dao.image,
+      },
+    });
+  }, []);
+
   return (
-    <Container maxWidth="lg">
-      <Box
-        sx={{
-          height: "100vh",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        {dao.dao}
+    <Container maxWidth="lg" sx={{ mt: 4 }}>
+      <Box sx={{ flexGrow: 1 }}>
+        <Grid container spacing={2}>
+          <Grid item xs={8}>
+            <Info />
+          </Grid>
+          <Grid item xs={4}>
+            <Treasury />
+          </Grid>
+          <Grid item xs={4}>
+            <Item>xs=4</Item>
+          </Grid>
+          <Grid item xs={8}>
+            <Currencies address={dao.treasuryAddress} />
+          </Grid>
+        </Grid>
       </Box>
     </Container>
   );

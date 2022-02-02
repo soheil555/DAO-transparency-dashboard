@@ -34,7 +34,17 @@ export default function SearchDAO() {
             sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
             {...props}
           >
-            <img loading="lazy" width="20" src={option.image} /> {option.dao}
+            <img
+              onError={({ currentTarget }) => {
+                currentTarget.onerror = null;
+                currentTarget.src =
+                  "https://deepdao.io/static/media/default_organization_placeholder.deb3bbce.svg";
+              }}
+              loading="lazy"
+              width="20"
+              src={option.image}
+            />{" "}
+            {option.dao}
           </Box>
         )}
       />

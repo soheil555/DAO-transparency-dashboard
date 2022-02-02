@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import Link from "./Link";
 
-import { ArrowRight } from "@mui/icons-material";
+import { ArrowRightAlt } from "@mui/icons-material";
 
 interface Props {
   dao: DAOType;
@@ -20,7 +20,16 @@ export default function DAO({ dao }: Props) {
   return (
     <Grow in={true}>
       <Card sx={{ width: 345, maxWidth: 345 }}>
-        <CardMedia component="img" height="200" image={dao.image} />
+        <CardMedia
+          component="img"
+          height="200"
+          image={dao.image}
+          onError={(e: any) => {
+            e.target.onerror = null;
+            e.target.src =
+              "https://deepdao.io/static/media/default_organization_placeholder.deb3bbce.svg";
+          }}
+        />
         <CardContent>
           <Typography variant="h5" component="div" gutterBottom>
             {dao.dao}
@@ -31,7 +40,11 @@ export default function DAO({ dao }: Props) {
         </CardContent>
         <CardActions sx={{ display: "flex", justifyContent: "flex-end" }}>
           <Link href={`/dao/${dao.dao}`}>
-            <Button endIcon={<ArrowRight />} variant="contained" size="medium">
+            <Button
+              endIcon={<ArrowRightAlt />}
+              variant="contained"
+              size="medium"
+            >
               Start Analayze
             </Button>
           </Link>
