@@ -6,8 +6,9 @@ import {
   CardContent,
   Grow,
   CardActions,
-  Button,
 } from "@mui/material";
+import { LoadingButton } from "@mui/lab";
+import { useState } from "react";
 import Link from "./Link";
 
 import { ArrowRightAlt } from "@mui/icons-material";
@@ -17,6 +18,8 @@ interface Props {
 }
 
 export default function DAO({ dao }: Props) {
+  const [loading, setLoading] = useState(false);
+
   return (
     <Grow in={true}>
       <Card sx={{ width: 345, maxWidth: 345 }}>
@@ -40,13 +43,19 @@ export default function DAO({ dao }: Props) {
         </CardContent>
         <CardActions sx={{ display: "flex", justifyContent: "flex-end" }}>
           <Link href={`/dao/${dao.dao}`}>
-            <Button
+            <LoadingButton
               endIcon={<ArrowRightAlt />}
               variant="contained"
               size="medium"
+              onClick={() => {
+                setLoading(true);
+              }}
+              loading={loading}
+              loadingPosition="end"
+              disabled
             >
               Start Analayze
-            </Button>
+            </LoadingButton>
           </Link>
         </CardActions>
       </Card>
