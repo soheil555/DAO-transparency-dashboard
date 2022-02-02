@@ -2,6 +2,7 @@ import { Box, TextField, Autocomplete } from "@mui/material";
 import { useState } from "react";
 import DAO from "./DAO";
 import { daos, DAO as DAOType } from "../../data";
+import Currencies from "./dao/Currencies";
 
 export default function SearchDAO() {
   const [dao, setDAO] = useState<DAOType | null>(null);
@@ -38,6 +39,8 @@ export default function SearchDAO() {
           </Box>
         )}
       />
+
+      <Currencies />
 
       {dao && <DAO dao={dao} />}
     </Box>
