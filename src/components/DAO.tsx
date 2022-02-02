@@ -8,6 +8,7 @@ import {
   CardActions,
   Button,
 } from "@mui/material";
+import Link from "./Link";
 
 import { ArrowRight } from "@mui/icons-material";
 
@@ -29,9 +30,11 @@ export default function DAO({ dao }: Props) {
           </Typography>
         </CardContent>
         <CardActions sx={{ display: "flex", justifyContent: "flex-end" }}>
-          <Button endIcon={<ArrowRight />} variant="contained" size="medium">
-            Start Analayze
-          </Button>
+          <Link href={`/dao/${dao.dao}`}>
+            <Button endIcon={<ArrowRight />} variant="contained" size="medium">
+              Start Analayze
+            </Button>
+          </Link>
         </CardActions>
       </Card>
     </Grow>

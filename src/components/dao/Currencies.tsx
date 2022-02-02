@@ -9,7 +9,6 @@ import {
   Skeleton,
 } from "@mui/material";
 import { covalentEth } from "../../services/api";
-import { daos } from "../../../data";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
@@ -26,8 +25,11 @@ function calcTreasury(items: Item[]) {
   return treasury;
 }
 
-export default function Currencies() {
-  const dao = daos[0];
+interface Props {
+  address: string;
+}
+
+export default function Currencies({ address }: Props) {
   const [items, setItems] = useState<Item[] | null>(null);
   const dispatch = useDispatch();
 
@@ -39,7 +41,7 @@ export default function Currencies() {
   const numberFormatter = new Intl.NumberFormat();
 
   useEffect(() => {
-    covalentEth.getTokenBalances!(dao.treasuryAddress).then((result) => {
+    covalentEth.getTokenBalances!(address).then((result) => {
       const items = result.data.items;
       setItems(items);
       const treasury = calcTreasury(items);
