@@ -9,7 +9,7 @@ import {
   ResponsiveContainer,
   Tooltip,
 } from "recharts";
-import { Skeleton } from "@mui/material";
+import { Skeleton, Card } from "@mui/material";
 import { convertToInternationalCurrencySystem } from "./Treasury";
 
 interface Props {
@@ -81,15 +81,17 @@ export default function HistoricalPortfolio({ address }: Props) {
   return (
     <>
       {data ? (
-        <ResponsiveContainer width="100%" height={400}>
-          <LineChart data={data}>
-            <Line type="monotone" dataKey="treasury" stroke="#8884d8" />
-            <CartesianGrid stroke="#ccc" />
-            <XAxis dataKey="date" />
-            <YAxis tickFormatter={convertToInternationalCurrencySystem} />
-            <Tooltip formatter={convertToInternationalCurrencySystem} />
-          </LineChart>
-        </ResponsiveContainer>
+        <Card sx={{ padding: 2 }}>
+          <ResponsiveContainer width="100%" height={400}>
+            <LineChart data={data}>
+              <Line type="monotone" dataKey="treasury" stroke="#8884d8" />
+              <CartesianGrid stroke="#ccc" />
+              <XAxis dataKey="date" />
+              <YAxis tickFormatter={convertToInternationalCurrencySystem} />
+              <Tooltip formatter={convertToInternationalCurrencySystem} />
+            </LineChart>
+          </ResponsiveContainer>
+        </Card>
       ) : (
         <Skeleton animation="wave" variant="rectangular" height={400} />
       )}

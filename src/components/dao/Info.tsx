@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
-import { Card, Box, Typography } from "@mui/material";
+import { Card, Box, Typography, Grid } from "@mui/material";
 
 export default function Info() {
   const { name, logo, description } = useSelector(
@@ -10,43 +10,65 @@ export default function Info() {
   return (
     <Card
       sx={{
-        height: 200,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
+        padding: 2,
       }}
     >
-      <Box sx={{ width: "50%", display: "flex", justifyContent: "center" }}>
-        <Box
+      <Grid
+        container
+        sx={{
+          minHeight: 230,
+        }}
+      >
+        <Grid
+          item
+          xs={12}
+          md={5}
           sx={{
-            width: "10rem",
-            height: "10rem",
-            borderRadius: "50%",
-            overflow: "hidden",
-            border: 2,
-            borderColor: "darkgray",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
           }}
-          component="div"
         >
-          <img
-            src={logo}
-            style={{ width: "100%", height: "100%", objectFit: "cover" }}
-            onError={({ currentTarget }) => {
-              currentTarget.onerror = null;
-              // currentTarget.src =
-              //   "https://deepdao.io/static/media/default_organization_placeholder.deb3bbce.svg";
+          <Box
+            sx={{
+              width: "10rem",
+              height: "10rem",
+              borderRadius: "50%",
+              overflow: "hidden",
+              border: 2,
+              borderColor: "darkgray",
             }}
-          />
-        </Box>
-      </Box>
+            component="div"
+          >
+            <img
+              src={logo}
+              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              onError={({ currentTarget }) => {
+                currentTarget.onerror = null;
+                // currentTarget.src =
+                //   "https://deepdao.io/static/media/default_organization_placeholder.deb3bbce.svg";
+              }}
+            />
+          </Box>
+        </Grid>
 
-      <Box sx={{ width: "50%" }}>
-        <Typography component="div" variant="h4" gutterBottom>
-          {name}
-        </Typography>
+        <Grid
+          item
+          xs={12}
+          md={5}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+          }}
+        >
+          <Typography component="div" variant="h4" gutterBottom>
+            {name}
+          </Typography>
 
-        <Typography component="div">{description}</Typography>
-      </Box>
+          <Typography component="div">{description}</Typography>
+        </Grid>
+      </Grid>
     </Card>
   );
 }

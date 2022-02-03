@@ -38,15 +38,16 @@ const DAO: NextPage<Props> = ({ dao }) => {
     <Container maxWidth="lg" sx={{ mt: 4 }}>
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
-          <Grid item xs={8}>
+          <Grid item xs={12}>
             <Info />
           </Grid>
-          <Grid item xs={4}>
-            <Treasury />
-          </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={12} md={8}>
             <HistoricalPortfolio address={dao.treasuryAddress} />
           </Grid>
+          <Grid item xs={8} md={4}>
+            <Treasury />
+          </Grid>
+
           <Grid item xs={12}>
             <Currencies address={dao.treasuryAddress} />
           </Grid>
