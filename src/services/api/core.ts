@@ -4,11 +4,17 @@ interface Options {
   chainId: number;
   getTokenBalances?: boolean;
   getHistoricalPortfolioValue?: boolean;
+  getTokenHolders?: boolean;
 }
 
 export class ApiCore {
   getTokenBalances?: (address: string) => Promise<any>;
   getHistoricalPortfolioValue?: (address: string) => Promise<any>;
+  getTokenHolders?: (
+    address: string,
+    pageNumber?: number,
+    pageSize?: number
+  ) => Promise<any>;
 
   constructor(options: Options) {
     if (options.getTokenBalances) {
@@ -22,6 +28,21 @@ export class ApiCore {
         return apiProvider.getHistoricalPortfolioValue(
           address,
           options.chainId
+        );
+      };
+    }
+
+    if (options.getTokenHolders) {
+      this.getTokenHolders = (
+        address: string,
+        pageNumber: number = 1,
+        pageSize: number = 10
+      ) => {
+        return apiProvider.getTokenHolders(
+          address,
+          options.chainId,
+          pageNumber,
+          pageSize
         );
       };
     }

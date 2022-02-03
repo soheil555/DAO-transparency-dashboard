@@ -6,6 +6,7 @@ import Currencies from "../../src/components/dao/Currencies";
 import Treasury from "../../src/components/dao/Treasury";
 import Info from "../../src/components/dao/Info";
 import HistoricalPortfolio from "../../src/components/dao/HistoricalPortfolio";
+import TopTokenHolders from "../../src/components/dao/TopTokenHolders";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 
@@ -41,6 +42,11 @@ const DAO: NextPage<Props> = ({ dao }) => {
           <Grid item xs={12}>
             <Info />
           </Grid>
+
+          <Grid item xs={12}>
+            <TopTokenHolders tokenAddress="0x1a4b46696b2bb4794eb3d4c26f1c55f9170fa4c5" />
+          </Grid>
+
           <Grid item xs={12} md={8}>
             <HistoricalPortfolio address={dao.treasuryAddress} />
           </Grid>

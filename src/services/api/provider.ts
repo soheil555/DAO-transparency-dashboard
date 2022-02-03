@@ -18,7 +18,22 @@ const getHistoricalPortfolioValue = (address: string, chainId: number) => {
     .catch(handleError);
 };
 
+const getTokenHolders = (
+  address: string,
+  chainId: number,
+  pageNumber: number,
+  pageSize: number
+) => {
+  return axios
+    .get(
+      `${BASE_URL}/${chainId}/tokens/${address}/token_holders/?key=${KEY}&page-number=${pageNumber}&page-size=${pageSize}`
+    )
+    .then(handleResponse)
+    .catch(handleError);
+};
+
 export const apiProvider = {
   getTokenBalances,
   getHistoricalPortfolioValue,
+  getTokenHolders,
 };
