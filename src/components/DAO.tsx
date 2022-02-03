@@ -42,21 +42,21 @@ export default function DAO({ dao }: Props) {
           </Typography>
         </CardContent>
         <CardActions sx={{ display: "flex", justifyContent: "flex-end" }}>
-          <Link href={`/dao/${dao.dao}`}>
-            <LoadingButton
-              endIcon={<ArrowRightAlt />}
-              variant="contained"
-              size="medium"
-              onClick={() => {
-                setLoading(true);
-              }}
-              loading={loading}
-              loadingPosition="end"
-              disabled
-            >
-              Start Analayze
-            </LoadingButton>
-          </Link>
+          <LoadingButton
+            LinkComponent={Link}
+            href={`/dao/${dao.dao}`}
+            endIcon={<ArrowRightAlt />}
+            variant="contained"
+            size="medium"
+            onClick={() => {
+              setLoading(true);
+            }}
+            loading={loading}
+            loadingPosition="end"
+            disabled={loading}
+          >
+            Start Analayze
+          </LoadingButton>
         </CardActions>
       </Card>
     </Grow>
