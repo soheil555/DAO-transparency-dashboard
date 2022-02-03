@@ -10,13 +10,16 @@ import {
 } from "@mui/material";
 import { covalentEth } from "../../services/api";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../redux/store";
 
 interface Item {
   contract_ticker_symbol: string;
   balance: string | number;
   quote: number;
   logo_url: string;
+  contract_address: string;
+  contract_name: string;
 }
 
 function calcTreasury(items: Item[]) {
@@ -32,6 +35,7 @@ interface Props {
 export default function Currencies({ address }: Props) {
   const [items, setItems] = useState<Item[] | null>(null);
   const dispatch = useDispatch();
+  const { name } = useSelector((state: RootState) => state.dao);
 
   const USDFromatter = new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -41,9 +45,27 @@ export default function Currencies({ address }: Props) {
   const numberFormatter = new Intl.NumberFormat();
 
   useEffect(() => {
+    if (name && items) {
+      const daoToken = items.find((item: Item) =>
+        item.contract_name.toLowerCase().includes(name.toLowerCase())
+      );
+      if (daoToken) {
+        dispatch({
+          type: "SET_DAO_TOKEN",
+          payload: {
+            contract_ticker_symbol: daoToken.contract_ticker_symbol,
+            contract_address: daoToken.contract_address,
+          },
+        });
+      }
+    }
+  }, [name, items]);
+
+  useEffect(() => {
     dispatch({ type: "TOGGLE_DAO_TREASURY_LOADING" });
     covalentEth.getTokenBalances!(address).then((result) => {
       const items = result.data.items;
+
       setItems(items);
       const treasury = calcTreasury(items);
       dispatch({ type: "SET_DAO_TREASURY", payload: { treasury } });

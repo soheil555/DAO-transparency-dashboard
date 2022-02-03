@@ -7,19 +7,13 @@ import Treasury from "../../src/components/dao/Treasury";
 import Info from "../../src/components/dao/Info";
 import HistoricalPortfolio from "../../src/components/dao/HistoricalPortfolio";
 import TopTokenHolders from "../../src/components/dao/TopTokenHolders";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { RootState } from "../../redux/store";
 
 interface Props {
   dao: DAO;
 }
-
-const Item = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}));
 
 const DAO: NextPage<Props> = ({ dao }) => {
   const dispatch = useDispatch();

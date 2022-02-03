@@ -47,7 +47,7 @@ export default function TopTokenHolders({ tokenAddress }: Props) {
         >
           {holders.map((holder, index) => {
             return (
-              <Card sx={{ minWidth: 200 }}>
+              <Card key={index} sx={{ minWidth: 200 }}>
                 <CardContent>
                   <Box
                     sx={{
