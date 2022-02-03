@@ -37,8 +37,8 @@ export default function SearchDAO() {
             <img
               onError={({ currentTarget }) => {
                 currentTarget.onerror = null;
-                currentTarget.src =
-                  "https://deepdao.io/static/media/default_organization_placeholder.deb3bbce.svg";
+                // currentTarget.src =
+                //   "https://deepdao.io/static/media/default_organization_placeholder.deb3bbce.svg";
               }}
               loading="lazy"
               width="20"

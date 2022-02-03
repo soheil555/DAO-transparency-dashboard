@@ -5,6 +5,7 @@ import { styled } from "@mui/material/styles";
 import Currencies from "../../src/components/dao/Currencies";
 import Treasury from "../../src/components/dao/Treasury";
 import Info from "../../src/components/dao/Info";
+import HistoricalPortfolio from "../../src/components/dao/HistoricalPortfolio";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 
@@ -43,10 +44,10 @@ const DAO: NextPage<Props> = ({ dao }) => {
           <Grid item xs={4}>
             <Treasury />
           </Grid>
-          <Grid item xs={4}>
-            <Item>xs=4</Item>
+          <Grid item xs={12}>
+            <HistoricalPortfolio address={dao.treasuryAddress} />
           </Grid>
-          <Grid item xs={8}>
+          <Grid item xs={12}>
             <Currencies address={dao.treasuryAddress} />
           </Grid>
         </Grid>

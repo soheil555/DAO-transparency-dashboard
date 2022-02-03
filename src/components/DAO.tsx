@@ -29,8 +29,8 @@ export default function DAO({ dao }: Props) {
           image={dao.image}
           onError={(e: any) => {
             e.target.onerror = null;
-            e.target.src =
-              "https://deepdao.io/static/media/default_organization_placeholder.deb3bbce.svg";
+            // e.target.src =
+            //   "https://deepdao.io/static/media/default_organization_placeholder.deb3bbce.svg";
           }}
         />
         <CardContent>

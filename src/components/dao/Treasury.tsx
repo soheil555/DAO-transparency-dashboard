@@ -2,7 +2,9 @@ import { Typography, Card, CardContent, Skeleton } from "@mui/material";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
 
-function convertToInternationalCurrencySystem(labelValue: number) {
+export function convertToInternationalCurrencySystem(
+  labelValue: number
+): string {
   // Nine Zeroes for Billions
   return Math.abs(Number(labelValue)) >= 1.0e9
     ? (Math.abs(Number(labelValue)) / 1.0e9).toFixed(1) + "B"
@@ -12,7 +14,7 @@ function convertToInternationalCurrencySystem(labelValue: number) {
     : // Three Zeroes for Thousands
     Math.abs(Number(labelValue)) >= 1.0e3
     ? (Math.abs(Number(labelValue)) / 1.0e3).toFixed(1) + "K"
-    : Math.abs(Number(labelValue));
+    : String(Math.abs(Number(labelValue)));
 }
 
 export default function Treasury() {

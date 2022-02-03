@@ -87,8 +87,8 @@ export default function Currencies({ address }: Props) {
                         loading="lazy"
                         onError={({ currentTarget }) => {
                           currentTarget.onerror = null;
-                          currentTarget.src =
-                            "https://deepdao.io/static/media/default_token_placeholder.5a319af1.svg";
+                          // currentTarget.src =
+                          //   "https://deepdao.io/static/media/default_token_placeholder.5a319af1.svg";
                         }}
                         style={{
                           width: "50%",
