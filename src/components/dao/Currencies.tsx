@@ -55,7 +55,11 @@ export default function Currencies({ address }: Props) {
           payload: {
             contract_ticker_symbol: daoToken.contract_ticker_symbol,
             contract_address: daoToken.contract_address,
+            logo_url: daoToken.logo_url,
           },
+        });
+        dispatch({
+          type: "TOGGLE_DAO_TOKEN_LOADED",
         });
       }
     }

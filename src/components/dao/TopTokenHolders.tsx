@@ -11,25 +11,32 @@ import {
 import { Box } from "@mui/system";
 import { useState, useEffect } from "react";
 import { covalentEth } from "../../services/api";
-
-interface Props {
-  tokenAddress: string;
-}
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../../../redux/store";
 
 interface Holder {
   address: string;
   balance: string;
 }
 
-export default function TopTokenHolders({ tokenAddress }: Props) {
+export default function TopTokenHolders() {
   const [holders, setHolders] = useState<Holder[] | null>(null);
+  const { token, isTokenLoaded } = useSelector((state: RootState) => state.dao);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    covalentEth.getTokenHolders!(tokenAddress).then((result) => {
-      const items = result.data.items;
-      setHolders(items);
-    });
-  }, []);
+    if (token && isTokenLoaded) {
+      console.log(token.contract_ticker_symbol);
+      console.log(token.contract_address);
+      covalentEth.getTokenHolders!(token.contract_address).then((result) => {
+        const items = result.data.items;
+        setHolders(items);
+        dispatch({
+          type: "TOGGLE_DAO_TOKEN_LOADED",
+        });
+      });
+    }
+  }, [isTokenLoaded]);
 
   return (
     <>

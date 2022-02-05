@@ -1,6 +1,15 @@
-import { Typography, Card, CardContent, Skeleton } from "@mui/material";
+import {
+  Typography,
+  Card,
+  CardContent,
+  Skeleton,
+  Avatar,
+  Box,
+} from "@mui/material";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
+import { Token } from "../../../redux/reducers/daoReducer";
+import { useState, useEffect } from "react";
 
 export function convertToInternationalCurrencySystem(
   labelValue: number
@@ -18,23 +27,66 @@ export function convertToInternationalCurrencySystem(
 }
 
 export default function Treasury() {
-  const { treasury, isTreasuryLoading } = useSelector(
+  const { treasury, isTreasuryLoading, token, isTokenLoaded } = useSelector(
     (state: RootState) => state.dao
   );
 
+  const [daoToken, setDaoToken] = useState<Token | null>(null);
+
+  useEffect(() => {
+    if (token && isTokenLoaded) {
+      setDaoToken(token);
+    }
+  }, [isTokenLoaded]);
+
   return (
-    <Card sx={{ height: 200 }}>
+    <Card sx={{ height: 300 }}>
       <CardContent>
         <Typography sx={{ fontSize: 18 }} color="text.secondary" gutterBottom>
           Treasury
         </Typography>
-        <Typography variant="h3" component="div">
+        <Typography variant="h3" component="div" gutterBottom>
           {!isTreasuryLoading && treasury ? (
             "$" + convertToInternationalCurrencySystem(treasury)
           ) : (
             <Skeleton />
           )}
         </Typography>
+
+        <Typography sx={{ fontSize: 18 }} color="text.secondary" gutterBottom>
+          DAO Token
+        </Typography>
+
+        <Box component="div">
+          {daoToken ? (
+            <Box
+              component="div"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 10,
+              }}
+            >
+              <img
+                loading="lazy"
+                onError={({ currentTarget }) => {
+                  currentTarget.onerror = null;
+                  currentTarget.src = "/token.png";
+                }}
+                style={{
+                  height: "2.5rem",
+                  objectFit: "contain",
+                }}
+                src={daoToken.logo_url}
+              />
+              <Typography variant="h3" component="div">
+                {daoToken.contract_ticker_symbol}
+              </Typography>
+            </Box>
+          ) : (
+            <Skeleton />
+          )}
+        </Box>
       </CardContent>
     </Card>
   );

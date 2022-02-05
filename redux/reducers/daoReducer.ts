@@ -23,12 +23,19 @@ type ActionType =
       payload: Token;
     }
   | {
+      type: "TOGGLE_DAO_TOKEN_LOADED";
+    }
+  | {
+      type: "RESET_DAO_TOKEN";
+    }
+  | {
       type: "RESET_DAO";
     };
 
-type Token = {
+export type Token = {
   contract_ticker_symbol: string;
   contract_address: string;
+  logo_url: string;
 };
 
 type StateType = {
@@ -38,6 +45,7 @@ type StateType = {
   logo?: string;
   isTreasuryLoading?: boolean;
   token?: Token;
+  isTokenLoaded?: boolean;
 };
 
 const initState: StateType = {
@@ -45,8 +53,9 @@ const initState: StateType = {
   name: undefined,
   description: undefined,
   logo: undefined,
-  isTreasuryLoading: undefined,
+  isTreasuryLoading: false,
   token: undefined,
+  isTokenLoaded: false,
 };
 
 const daoReducer: Reducer<StateType, ActionType> = (
@@ -66,6 +75,12 @@ const daoReducer: Reducer<StateType, ActionType> = (
         isTreasuryLoading: !state.isTreasuryLoading,
       };
 
+    case "TOGGLE_DAO_TOKEN_LOADED":
+      return {
+        ...state,
+        isTokenLoaded: !state.isTokenLoaded,
+      };
+
     case "SET_DAO_INFO":
       return {
         ...state,
@@ -80,7 +95,14 @@ const daoReducer: Reducer<StateType, ActionType> = (
         token: {
           contract_ticker_symbol: action.payload.contract_ticker_symbol,
           contract_address: action.payload.contract_address,
+          logo_url: action.payload.logo_url,
         },
+      };
+
+    case "RESET_DAO_TOKEN":
+      return {
+        ...state,
+        token: undefined,
       };
 
     case "RESET_DAO":

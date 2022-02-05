@@ -38,12 +38,13 @@ const DAO: NextPage<Props> = ({ dao }) => {
           </Grid>
 
           <Grid item xs={12}>
-            <TopTokenHolders tokenAddress="0x1a4b46696b2bb4794eb3d4c26f1c55f9170fa4c5" />
+            <TopTokenHolders />
           </Grid>
 
           <Grid item xs={12} md={8}>
             <HistoricalPortfolio address={dao.treasuryAddress} />
           </Grid>
+
           <Grid item xs={8} md={4}>
             <Treasury />
           </Grid>
