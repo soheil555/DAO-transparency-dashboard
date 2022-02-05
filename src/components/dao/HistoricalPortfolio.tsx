@@ -82,7 +82,7 @@ export default function HistoricalPortfolio({ address }: Props) {
     <>
       {data ? (
         <Card sx={{ padding: 2 }}>
-          <ResponsiveContainer width="100%" height={400}>
+          <ResponsiveContainer width="100%" height={455}>
             <LineChart data={data}>
               <Line type="monotone" dataKey="treasury" stroke="#8884d8" />
               <CartesianGrid stroke="#ccc" />
