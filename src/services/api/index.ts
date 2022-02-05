@@ -5,4 +5,5 @@ export const covalentEth = new ApiCore({
   getTokenBalances: true,
   getHistoricalPortfolioValue: true,
   getTokenHolders: true,
+  getHistoricalTokenPrices: true,
 });

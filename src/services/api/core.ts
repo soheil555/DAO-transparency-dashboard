@@ -5,6 +5,7 @@ interface Options {
   getTokenBalances?: boolean;
   getHistoricalPortfolioValue?: boolean;
   getTokenHolders?: boolean;
+  getHistoricalTokenPrices?: boolean;
 }
 
 export class ApiCore {
@@ -14,6 +15,11 @@ export class ApiCore {
     address: string,
     pageNumber?: number,
     pageSize?: number
+  ) => Promise<any>;
+  getHistoricalTokenPrices?: (
+    address: string,
+    from: string,
+    to: string
   ) => Promise<any>;
 
   constructor(options: Options) {
@@ -43,6 +49,21 @@ export class ApiCore {
           options.chainId,
           pageNumber,
           pageSize
+        );
+      };
+    }
+
+    if (options.getHistoricalTokenPrices) {
+      this.getHistoricalTokenPrices = (
+        address: string,
+        from: string,
+        to: string
+      ) => {
+        return apiProvider.getHistoricalTokenPrices(
+          address,
+          options.chainId,
+          from,
+          to
         );
       };
     }

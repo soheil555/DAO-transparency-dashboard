@@ -7,6 +7,7 @@ import Treasury from "../../src/components/dao/Treasury";
 import Info from "../../src/components/dao/Info";
 import HistoricalPortfolio from "../../src/components/dao/HistoricalPortfolio";
 import TopTokenHolders from "../../src/components/dao/TopTokenHolders";
+import Token from "../../src/components/dao/Token";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { RootState } from "../../redux/store";
@@ -32,21 +33,25 @@ const DAO: NextPage<Props> = ({ dao }) => {
   return (
     <Container maxWidth="lg" sx={{ mt: 4 }}>
       <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={2}>
+        <Grid container spacing={2} justifyContent="flex-end">
           <Grid item xs={12}>
             <Info />
+          </Grid>
+
+          <Grid item xs={12} md={4}>
+            <Treasury />
+          </Grid>
+
+          <Grid item xs={12} md={4}>
+            <Token />
           </Grid>
 
           <Grid item xs={12}>
             <TopTokenHolders />
           </Grid>
 
-          <Grid item xs={12} md={8}>
+          <Grid item xs={12} md={12}>
             <HistoricalPortfolio address={dao.treasuryAddress} />
-          </Grid>
-
-          <Grid item xs={8} md={4}>
-            <Treasury />
           </Grid>
 
           <Grid item xs={12}>

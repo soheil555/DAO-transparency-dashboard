@@ -32,8 +32,20 @@ const getTokenHolders = (
     .catch(handleError);
 };
 
+const getHistoricalTokenPrices = (
+  address: string,
+  chainId: number,
+  from: string,
+  to: string
+) => {
+  return axios.get(
+    `${BASE_URL}/pricing/historical_by_addresses_v2/${chainId}/USD/${address}/?quote-currency=USD&format=JSON&from=${from}&to=${to}&key=${KEY}`
+  );
+};
+
 export const apiProvider = {
   getTokenBalances,
   getHistoricalPortfolioValue,
   getTokenHolders,
+  getHistoricalTokenPrices,
 };

@@ -212,7 +212,7 @@ export const daos: DAO[] = [
       "Gitcoin is a significant grants center and community-builder for DAO-era coordination of capital and culture. It serves crypto education, employment market, project acceleration and BUIDLing through nurtured internal leadership and workstreams.",
     image:
       "https://deepdao-uploads.s3.us-east-2.amazonaws.com/assets/dao/logo/gitcoin.png",
-    treasuryAddress: "0xde21f729137c5af1b01d73af1dc21effa2b8a0d6",
+    treasuryAddress: "0x57a8865cfb1ecef7253c27da6b4bc3daee5be518",
   },
   {
     dao: "NFTX",

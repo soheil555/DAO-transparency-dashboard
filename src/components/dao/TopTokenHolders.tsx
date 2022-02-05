@@ -13,6 +13,7 @@ import { useState, useEffect } from "react";
 import { covalentEth } from "../../services/api";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../../redux/store";
+import { calcTokenHolders } from "../../utils";
 
 interface Holder {
   address: string;
@@ -26,10 +27,9 @@ export default function TopTokenHolders() {
 
   useEffect(() => {
     if (token && isTokenLoaded) {
-      console.log(token.contract_ticker_symbol);
-      console.log(token.contract_address);
       covalentEth.getTokenHolders!(token.contract_address).then((result) => {
         const items = result.data.items;
+
         setHolders(items);
         dispatch({
           type: "TOGGLE_DAO_TOKEN_LOADED",

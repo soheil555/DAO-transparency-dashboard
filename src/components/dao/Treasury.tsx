@@ -40,7 +40,7 @@ export default function Treasury() {
   }, [isTokenLoaded]);
 
   return (
-    <Card sx={{ height: 300 }}>
+    <Card sx={{ height: 150 }}>
       <CardContent>
         <Typography sx={{ fontSize: 18 }} color="text.secondary" gutterBottom>
           Treasury
@@ -52,41 +52,6 @@ export default function Treasury() {
             <Skeleton />
           )}
         </Typography>
-
-        <Typography sx={{ fontSize: 18 }} color="text.secondary" gutterBottom>
-          DAO Token
-        </Typography>
-
-        <Box component="div">
-          {daoToken ? (
-            <Box
-              component="div"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 10,
-              }}
-            >
-              <img
-                loading="lazy"
-                onError={({ currentTarget }) => {
-                  currentTarget.onerror = null;
-                  currentTarget.src = "/token.png";
-                }}
-                style={{
-                  height: "2.5rem",
-                  objectFit: "contain",
-                }}
-                src={daoToken.logo_url}
-              />
-              <Typography variant="h3" component="div">
-                {daoToken.contract_ticker_symbol}
-              </Typography>
-            </Box>
-          ) : (
-            <Skeleton />
-          )}
-        </Box>
       </CardContent>
     </Card>
   );
