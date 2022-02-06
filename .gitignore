@@ -48,5 +48,7 @@ chrome-linux
 prisma/*
 !prisma/schema.prisma
 !prisma/data.json
+!prisma/seed.ts
+!prisma/client.ts
 
 

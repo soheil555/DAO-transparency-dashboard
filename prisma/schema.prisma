@@ -12,7 +12,7 @@ model DAO {
   name        String
   description String
   logoUrl     String    @map("logo_url")
-  chainId     Int
+  chainId     Int       @default(1)
   addresses   Address[]
 
   @@map("daos")
