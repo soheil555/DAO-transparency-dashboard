@@ -4,7 +4,6 @@ import { RootState } from "../../../redux/store";
 import { Token as TokenType } from "../../../redux/reducers/daoReducer";
 import { useState, useEffect } from "react";
 import { covalentEth } from "../../services/api";
-import { ArrowUpward, ArrowDownward } from "@mui/icons-material";
 
 interface Price {
   price: number;
@@ -86,13 +85,13 @@ export default function Token() {
                 loading="lazy"
                 onError={({ currentTarget }) => {
                   currentTarget.onerror = null;
-                  currentTarget.src = "/token.png";
+                  currentTarget.src = "/default_token.png";
                 }}
                 style={{
                   height: "2.5rem",
                   objectFit: "contain",
                 }}
-                src={daoToken.logo_url}
+                src={daoToken.logoUrl}
               />
               <Typography variant="h3" component="div">
                 {daoToken.contract_ticker_symbol}

@@ -35,7 +35,7 @@ type ActionType =
 export type Token = {
   contract_ticker_symbol: string;
   contract_address: string;
-  logo_url: string;
+  logoUrl: string;
 };
 
 type StateType = {
@@ -95,7 +95,7 @@ const daoReducer: Reducer<StateType, ActionType> = (
         token: {
           contract_ticker_symbol: action.payload.contract_ticker_symbol,
           contract_address: action.payload.contract_address,
-          logo_url: action.payload.logo_url,
+          logoUrl: action.payload.logoUrl,
         },
       };
 

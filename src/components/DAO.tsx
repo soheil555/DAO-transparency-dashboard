@@ -1,4 +1,4 @@
-import { DAO as DAOType } from "../../data";
+import { DAO as DAOType } from "../../prisma/seed";
 import {
   Card,
   Typography,
@@ -26,16 +26,15 @@ export default function DAO({ dao }: Props) {
         <CardMedia
           component="img"
           height="200"
-          image={dao.image}
+          image={dao.logoUrl}
           onError={(e: any) => {
             e.target.onerror = null;
-            // e.target.src =
-            //   "https://deepdao.io/static/media/default_organization_placeholder.deb3bbce.svg";
+            e.target.src = "/default_dao.png";
           }}
         />
         <CardContent>
           <Typography variant="h5" component="div" gutterBottom>
-            {dao.dao}
+            {dao.name}
           </Typography>
           <Typography variant="body2" color="text.secondary">
             {dao.description}
@@ -44,7 +43,7 @@ export default function DAO({ dao }: Props) {
         <CardActions sx={{ display: "flex", justifyContent: "flex-end" }}>
           <LoadingButton
             LinkComponent={Link}
-            href={`/dao/${dao.dao}`}
+            href={`/dao/${dao.id}`}
             endIcon={<ArrowRightAlt />}
             variant="contained"
             size="medium"

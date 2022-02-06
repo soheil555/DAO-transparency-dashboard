@@ -55,7 +55,7 @@ export default function Currencies({ address }: Props) {
           payload: {
             contract_ticker_symbol: daoToken.contract_ticker_symbol,
             contract_address: daoToken.contract_address,
-            logo_url: daoToken.logo_url,
+            logoUrl: daoToken.logo_url,
           },
         });
         dispatch({
@@ -74,6 +74,8 @@ export default function Currencies({ address }: Props) {
       const treasury = calcTreasury(items);
       dispatch({ type: "SET_DAO_TREASURY", payload: { treasury } });
       dispatch({ type: "TOGGLE_DAO_TREASURY_LOADING" });
+
+      console.log(items);
     });
   }, []);
 
@@ -113,7 +115,7 @@ export default function Currencies({ address }: Props) {
                         loading="lazy"
                         onError={({ currentTarget }) => {
                           currentTarget.onerror = null;
-                          currentTarget.src = "/token.png";
+                          currentTarget.src = "/default_token.png";
                         }}
                         style={{
                           width: "50%",

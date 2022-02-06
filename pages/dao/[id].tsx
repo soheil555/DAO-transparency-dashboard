@@ -1,16 +1,15 @@
 import type { NextPage, GetServerSideProps } from "next";
-import { Container, Box, Grid, Paper } from "@mui/material";
-import { daos, DAO } from "../../data";
-import { styled } from "@mui/material/styles";
+import { Container, Box, Grid } from "@mui/material";
 import Currencies from "../../src/components/dao/Currencies";
 import Treasury from "../../src/components/dao/Treasury";
 import Info from "../../src/components/dao/Info";
 import HistoricalPortfolio from "../../src/components/dao/HistoricalPortfolio";
 import TopTokenHolders from "../../src/components/dao/TopTokenHolders";
 import Token from "../../src/components/dao/Token";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { RootState } from "../../redux/store";
+import prisma from "../../prisma/client";
+import { DAO } from "../../prisma/seed";
 
 interface Props {
   dao: DAO;
@@ -23,9 +22,9 @@ const DAO: NextPage<Props> = ({ dao }) => {
     dispatch({
       type: "SET_DAO_INFO",
       payload: {
-        name: dao.dao,
+        name: dao.name,
         description: dao.description,
-        logo: dao.image,
+        logo: dao.logoUrl,
       },
     });
   }, []);
@@ -49,7 +48,7 @@ const DAO: NextPage<Props> = ({ dao }) => {
           </Grid>
 
           <Grid item xs={12} md={8}>
-            <HistoricalPortfolio address={dao.treasuryAddress} />
+            <HistoricalPortfolio address={dao.addresses[0].address} />
           </Grid>
 
           <Grid item xs={12}>
@@ -57,7 +56,7 @@ const DAO: NextPage<Props> = ({ dao }) => {
           </Grid>
 
           <Grid item xs={12}>
-            <Currencies address={dao.treasuryAddress} />
+            <Currencies address={dao.addresses[0].address} />
           </Grid>
         </Grid>
       </Box>
@@ -68,9 +67,14 @@ const DAO: NextPage<Props> = ({ dao }) => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { id } = context.query;
 
-  const dao = daos.find(
-    (dao) => dao.dao.toLowerCase() == (id as string).toLowerCase()
-  );
+  let dao = undefined;
+
+  if (!isNaN(Number(id))) {
+    dao = await prisma.dAO.findFirst({
+      where: { id: Number(id) },
+      include: { addresses: true },
+    });
+  }
 
   if (!dao) {
     return {

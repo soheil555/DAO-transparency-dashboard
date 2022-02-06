@@ -45,8 +45,7 @@ export default function Info() {
               style={{ width: "100%", height: "100%", objectFit: "cover" }}
               onError={({ currentTarget }) => {
                 currentTarget.onerror = null;
-                // currentTarget.src =
-                //   "https://deepdao.io/static/media/default_organization_placeholder.deb3bbce.svg";
+                currentTarget.src = "/default_dao.png";
               }}
             />
           </Box>

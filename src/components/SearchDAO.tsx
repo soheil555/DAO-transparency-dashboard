@@ -1,9 +1,13 @@
 import { Box, TextField, Autocomplete } from "@mui/material";
 import { useState } from "react";
 import DAO from "./DAO";
-import { daos, DAO as DAOType } from "../../data";
+import { DAO as DAOType } from "../../prisma/seed";
 
-export default function SearchDAO() {
+interface Props {
+  daos: DAOType[];
+}
+
+export default function SearchDAO({ daos }: Props) {
   const [dao, setDAO] = useState<DAOType | null>(null);
 
   return (
@@ -26,7 +30,7 @@ export default function SearchDAO() {
         options={daos}
         fullWidth
         sx={{ mb: 2 }}
-        getOptionLabel={(option) => option.dao}
+        getOptionLabel={(option) => option.name}
         renderInput={(params) => <TextField {...params} label="Search DAOS" />}
         renderOption={(props, option) => (
           <Box
@@ -37,14 +41,13 @@ export default function SearchDAO() {
             <img
               onError={({ currentTarget }) => {
                 currentTarget.onerror = null;
-                // currentTarget.src =
-                //   "https://deepdao.io/static/media/default_organization_placeholder.deb3bbce.svg";
+                currentTarget.src = "/default_dao.png";
               }}
               loading="lazy"
               width="20"
-              src={option.image}
+              src={option.logoUrl}
             />{" "}
-            {option.dao}
+            {option.name}
           </Box>
         )}
       />

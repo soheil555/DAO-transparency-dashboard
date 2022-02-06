@@ -12,10 +12,11 @@ interface Address {
   description: string;
 }
 
-interface DAO {
+export interface DAO {
+  id?: number;
   name: string;
   description: string;
-  logo_url: string;
+  logoUrl: string;
   addresses: Address[];
 }
 
@@ -148,7 +149,7 @@ async function updateData(data: DAO[], dataPath: string) {
     data.push({
       name: daoName,
       description,
-      logo_url: daoLogoUrl!,
+      logoUrl: daoLogoUrl!,
       addresses: addresses,
     });
 
@@ -195,7 +196,7 @@ async function main() {
       data: {
         name: dao.name,
         description: dao.description,
-        logoUrl: dao.logo_url,
+        logoUrl: dao.logoUrl,
       },
     });
 
