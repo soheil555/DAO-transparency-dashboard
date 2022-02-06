@@ -143,7 +143,7 @@ async function updateData(data: DAO[], dataPath: string) {
 
     const description = await page.$eval(
       companyDescriptionSelector,
-      (el) => el.innerHTML
+      (el: any) => el.innerText
     );
 
     data.push({

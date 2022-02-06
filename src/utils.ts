@@ -1,34 +1,34 @@
 import { covalentEth } from "./services/api";
+import prisma from "../prisma/client";
 
-export async function calcTokenHolders(address: string) {
-  let pageNumber = 1;
-  let data: any[] = [];
-  while (true) {
-    const items = (
-      await covalentEth.getTokenHolders!(address, pageNumber, 10000)
-    ).data.items;
-    console.log("loading more ...");
-    if (items.length === 0) {
-      break;
-    }
-    data = [...data, ...items];
-    pageNumber += 1;
+interface Item {
+  contract_ticker_symbol: string;
+  balance: string | number;
+  quote: number;
+  logo_url: string;
+  contract_address: string;
+  contract_name: string;
+}
+
+export function calcTreasury(items: Item[]) {
+  let treasury = 0;
+  items.forEach((item) => (treasury += item.quote));
+  return treasury;
+}
+
+export async function calcTokenBalances(daoId: number) {
+  const dao = await prisma.dAO.findFirst({
+    where: { id: daoId },
+    include: { addresses: { where: { type: "treasury" } } },
+  });
+
+  if (!dao || dao.addresses.length === 0) {
+    return [];
   }
 
-  console.log(
-    data.sort((a, b) => {
-      const balanceB = Number(b.balance);
-      const balanceA = Number(a.balance);
+  for (const address of dao.addresses) {
+    const balance = await covalentEth.getTokenBalances!(address.address);
 
-      if (balanceB > balanceA) {
-        return -1;
-      }
-
-      if (balanceA > balanceB) {
-        return 1;
-      }
-
-      return 0;
-    })
-  );
+    console.log(balance);
+  }
 }
