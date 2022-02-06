@@ -40,8 +40,13 @@ yarn-error.log*
 # vscode
 .vscode
 
-#chrome
+# chrome
 chrome-linux
 
 
-data.json
+# prisma
+prisma/*
+!prisma/schema.prisma
+!prisma/data.json
+
+
