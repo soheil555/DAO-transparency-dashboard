@@ -27,15 +27,12 @@ function calcPriceChange(prices: Price[]) {
 }
 
 export default function Token() {
-  const { token, isTokenLoaded } = useSelector((state: RootState) => state.dao);
+  const { token } = useSelector((state: RootState) => state.dao);
 
-  const [daoToken, setDaoToken] = useState<TokenType | null>(null);
   const [tokenPrice, setTokenPrice] = useState<TokenPrice | null>(null);
 
   useEffect(() => {
-    if (token && isTokenLoaded) {
-      setDaoToken(token);
-
+    if (token) {
       let now: Date | string;
       let lastMonth: Date | string;
       now = new Date();
@@ -60,7 +57,7 @@ export default function Token() {
         });
       });
     }
-  }, [isTokenLoaded]);
+  }, [token]);
 
   return (
     <Card sx={{ height: 320 }}>
@@ -70,7 +67,7 @@ export default function Token() {
         </Typography>
 
         <Box component="div">
-          {daoToken ? (
+          {token ? (
             <Box
               component="div"
               style={{
@@ -89,10 +86,10 @@ export default function Token() {
                   height: "2.5rem",
                   objectFit: "contain",
                 }}
-                src={daoToken.logoUrl}
+                src={token.logoUrl}
               />
               <Typography variant="h3" component="div">
-                {daoToken.contract_ticker_symbol}
+                {token.contract_ticker_symbol}
               </Typography>
             </Box>
           ) : (

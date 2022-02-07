@@ -25,12 +25,10 @@ export default function HistoricalPortfolio() {
   const { id } = useSelector((state: RootState) => state.dao);
 
   useEffect(() => {
-    if (id) {
-      axios.get(`/api/dao/${id}/historical_treasury`).then((result) => {
-        setData(result.data);
-      });
-    }
-  }, [id]);
+    axios.get(`/api/dao/${id}/historical_treasury`).then((result) => {
+      setData(result.data);
+    });
+  }, []);
 
   return (
     <>

@@ -17,17 +17,8 @@ type ActionType =
       };
     }
   | {
-      type: "TOGGLE_DAO_TREASURY_LOADED";
-    }
-  | {
       type: "SET_DAO_TOKEN";
       payload: Token;
-    }
-  | {
-      type: "TOGGLE_DAO_TOKEN_LOADED";
-    }
-  | {
-      type: "RESET_DAO_TOKEN";
     }
   | {
       type: "RESET_DAO";
@@ -72,18 +63,6 @@ const daoReducer: Reducer<StateType, ActionType> = (
         treasury: action.payload.treasury,
       };
 
-    case "TOGGLE_DAO_TREASURY_LOADED":
-      return {
-        ...state,
-        isTreasuryLoaded: !state.isTreasuryLoaded,
-      };
-
-    case "TOGGLE_DAO_TOKEN_LOADED":
-      return {
-        ...state,
-        isTokenLoaded: !state.isTokenLoaded,
-      };
-
     case "SET_DAO_INFO":
       return {
         ...state,
@@ -101,12 +80,6 @@ const daoReducer: Reducer<StateType, ActionType> = (
           contract_address: action.payload.contract_address,
           logoUrl: action.payload.logoUrl,
         },
-      };
-
-    case "RESET_DAO_TOKEN":
-      return {
-        ...state,
-        token: undefined,
       };
 
     case "RESET_DAO":

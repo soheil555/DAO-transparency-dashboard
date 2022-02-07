@@ -48,17 +48,12 @@ export default function Currencies() {
             logoUrl: daoToken.logo_url,
           },
         });
-        dispatch({
-          type: "TOGGLE_DAO_TOKEN_LOADED",
-        });
       }
     }
   }, [name, items]);
 
   useEffect(() => {
     if (id) {
-      dispatch({ type: "TOGGLE_DAO_TREASURY_LOADING" });
-
       axios.get(`/api/dao/${id}/treasury`).then((result) => {
         setItems(result.data.tokenBalances);
 
@@ -66,7 +61,6 @@ export default function Currencies() {
           type: "SET_DAO_TREASURY",
           payload: { treasury: result.data.treasury },
         });
-        dispatch({ type: "TOGGLE_DAO_TREASURY_LOADING" });
       });
     }
   }, [id]);
