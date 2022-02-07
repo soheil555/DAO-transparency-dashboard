@@ -24,6 +24,7 @@ model Address {
   type        String
   description String?
   linkUrl     String? @map("link_url")
+  active      Boolean @default(true)
 
   DAO   DAO? @relation(fields: [daoId], references: [id])
   daoId Int? @map("dao_id")

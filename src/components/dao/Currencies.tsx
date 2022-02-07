@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../../redux/store";
+import { RootState } from "redux/store";
 import axios from "axios";
 
 interface Item {
@@ -36,9 +36,22 @@ export default function Currencies() {
 
   useEffect(() => {
     if (name && items) {
-      const daoToken = items.find((item: Item) =>
+      const daoTokens = items.filter((item: Item) =>
         item.contract_name.toLowerCase().includes(name.toLowerCase())
       );
+
+      let daoToken: Item | undefined;
+
+      if (daoTokens.length === 1) {
+        daoToken = daoTokens[0];
+      } else {
+        daoToken = daoTokens.find((token) =>
+          token.contract_name
+            .toLowerCase()
+            .includes(`${name.toLowerCase()} token`)
+        );
+      }
+
       if (daoToken) {
         dispatch({
           type: "SET_DAO_TOKEN",

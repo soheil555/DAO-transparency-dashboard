@@ -62,7 +62,7 @@ async function daoHistoricalTreasuryRoute(
     case "GET":
       const dao = await prisma.dAO.findFirst({
         where: { id: Number(id) },
-        include: { addresses: { where: { type: "treasury" } } },
+        include: { addresses: { where: { type: "treasury", active: true } } },
       });
 
       if (!dao || dao.addresses.length === 0) {
@@ -74,7 +74,11 @@ async function daoHistoricalTreasuryRoute(
       let totalHistoricalItems: Item[] = [];
 
       for (const address of dao.addresses) {
-        const historical = await covalentEth.getHistoricalPortfolioValue!(
+        console.log(`${address.address} treasury `);
+
+        let historical: any;
+
+        historical = await covalentEth.getHistoricalPortfolioValue!(
           address.address
         );
 

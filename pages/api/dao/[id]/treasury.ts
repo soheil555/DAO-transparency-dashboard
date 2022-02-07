@@ -22,7 +22,7 @@ async function daoTreasuryRoute(req: NextApiRequest, res: NextApiResponse) {
     case "GET":
       const dao = await prisma.dAO.findFirst({
         where: { id: Number(id) },
-        include: { addresses: { where: { type: "treasury" } } },
+        include: { addresses: { where: { type: "treasury", active: true } } },
       });
 
       if (!dao || dao.addresses.length === 0) {
