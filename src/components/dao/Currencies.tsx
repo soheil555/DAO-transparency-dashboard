@@ -36,8 +36,10 @@ export default function Currencies() {
 
   useEffect(() => {
     if (name && items) {
+      const daoName = name.toLowerCase().replace("dao", "").trim();
+
       const daoTokens = items.filter((item: Item) =>
-        item.contract_name.toLowerCase().includes(name.toLowerCase())
+        item.contract_name.toLowerCase().includes(daoName)
       );
 
       let daoToken: Item | undefined;
@@ -45,11 +47,23 @@ export default function Currencies() {
       if (daoTokens.length === 1) {
         daoToken = daoTokens[0];
       } else {
-        daoToken = daoTokens.find((token) =>
-          token.contract_name
-            .toLowerCase()
-            .includes(`${name.toLowerCase()} token`)
-        );
+        const candidates = [
+          `${name.toLowerCase()} token`,
+          `${name.toLowerCase()} dao token`,
+          `${daoName} token`,
+          `${daoName} dao token`,
+          daoName,
+        ];
+
+        for (const candidate of candidates) {
+          daoToken = daoTokens.find((token) =>
+            token.contract_name.toLowerCase().includes(candidate)
+          );
+
+          if (daoToken) {
+            break;
+          }
+        }
       }
 
       if (daoToken) {
