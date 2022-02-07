@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { covalentEth } from "../../services/api";
 import {
   LineChart,
   Line,
@@ -11,22 +10,9 @@ import {
 } from "recharts";
 import { Skeleton, Card } from "@mui/material";
 import { convertToInternationalCurrencySystem } from "./Treasury";
-
-interface Props {
-  address: string;
-}
-
-interface Holding {
-  timestamp: string;
-
-  close: {
-    quote: number;
-  };
-}
-
-interface Item {
-  holdings: Holding[];
-}
+import { useSelector } from "react-redux";
+import { RootState } from "redux/store";
+import axios from "axios";
 
 interface Data {
   date: string;
@@ -34,49 +20,17 @@ interface Data {
   treasuryShort: string;
 }
 
-function calcHistoricalPortfolio(items: Item[]) {
-  const data: {
-    [key: string]: number;
-  } = {};
-
-  for (const item of items) {
-    for (const holding of item.holdings) {
-      if (data[holding.timestamp]) {
-        data[holding.timestamp] += holding.close.quote;
-      } else {
-        data[holding.timestamp] = holding.close.quote;
-      }
-    }
-  }
-
-  const shortMonthName = new Intl.DateTimeFormat("en-US", { month: "short" })
-    .format;
-
-  const result = [];
-  for (const [timestamp, treasury] of Object.entries(data)) {
-    const date = new Date(timestamp);
-    const month = shortMonthName(date);
-    const day = date.getDate();
-
-    const treasuryShort = convertToInternationalCurrencySystem(
-      treasury
-    ) as string;
-
-    result.unshift({ date: `${month} ${day}`, treasury, treasuryShort });
-  }
-
-  return result;
-}
-
-export default function HistoricalPortfolio({ address }: Props) {
+export default function HistoricalPortfolio() {
   const [data, setData] = useState<Data[] | null>(null);
+  const { id } = useSelector((state: RootState) => state.dao);
 
   useEffect(() => {
-    covalentEth.getHistoricalPortfolioValue!(address).then((result) => {
-      const data = calcHistoricalPortfolio(result.items);
-      setData(data);
-    });
-  }, []);
+    if (id) {
+      axios.get(`/api/dao/${id}/historical_treasury`).then((result) => {
+        setData(result.data);
+      });
+    }
+  }, [id]);
 
   return (
     <>

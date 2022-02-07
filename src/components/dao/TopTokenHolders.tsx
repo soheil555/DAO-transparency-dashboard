@@ -25,9 +25,13 @@ export default function TopTokenHolders() {
   useEffect(() => {
     if (token && isTokenLoaded) {
       covalentEth.getTokenHolders!(token.contract_address).then((result) => {
-        const items = result.data.items;
+        if (result) {
+          const items = result.data.items;
+          setHolders(items);
+        } else {
+          setHolders([]);
+        }
 
-        setHolders(items);
         dispatch({
           type: "TOGGLE_DAO_TOKEN_LOADED",
         });

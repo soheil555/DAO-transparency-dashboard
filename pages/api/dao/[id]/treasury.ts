@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import prisma from "../../../../prisma/client";
-import { covalentEth } from "../../../../src/services/api";
+import prisma from "prisma/client";
+import { covalentEth } from "src/services/api";
 import BigNumber from "bignumber.js";
 
 interface TokenBalance {
