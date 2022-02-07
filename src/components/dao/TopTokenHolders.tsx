@@ -24,12 +24,21 @@ export default function TopTokenHolders() {
 
   useEffect(() => {
     if (token) {
-      covalentEth.getTokenHolders!(token.contract_address).then((result) => {
-        if (result) {
-          const items = result.data.items;
-          setHolders(items);
-        }
-      });
+      covalentEth.getTokenHolders!(token.contract_address)
+        .then((result) => {
+          if (result) {
+            const items = result.data.items;
+            setHolders(items);
+          }
+        })
+        .catch((error) => {
+          dispatch({
+            type: "SET_ERROR",
+            payload: {
+              message: "Failed to get token holders. Please refresh page.",
+            },
+          });
+        });
     }
   }, [token]);
 

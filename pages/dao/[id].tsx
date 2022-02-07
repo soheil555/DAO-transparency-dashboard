@@ -11,6 +11,9 @@ import { useEffect } from "react";
 import prisma from "prisma/client";
 import { DAO } from "prisma/seed";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "redux/store";
+import Error from "src/components/dao/Error";
 
 interface Props {
   dao: DAO;
@@ -19,6 +22,7 @@ interface Props {
 const DAO: NextPage<Props> = ({ dao }) => {
   const dispatch = useDispatch();
   const [daoLoaded, setDaoLoaded] = useState(false);
+  const { error } = useSelector((state: RootState) => state.dao);
 
   useEffect(() => {
     dispatch({ type: "RESET_DAO" });
@@ -69,6 +73,7 @@ const DAO: NextPage<Props> = ({ dao }) => {
               </Grid>
             </Grid>
           </Box>
+          {error && <Error message={error.message} />}
         </Container>
       ) : (
         ""

@@ -74,8 +74,6 @@ async function daoHistoricalTreasuryRoute(
       let totalHistoricalItems: Item[] = [];
 
       for (const address of dao.addresses) {
-        console.log(`${address.address} treasury `);
-
         let historical: any;
 
         historical = await covalentEth.getHistoricalPortfolioValue!(

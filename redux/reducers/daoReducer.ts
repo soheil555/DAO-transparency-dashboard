@@ -21,6 +21,15 @@ type ActionType =
       payload: Token;
     }
   | {
+      type: "SET_ERROR";
+      payload: {
+        message: Error["message"];
+      };
+    }
+  | {
+      type: "HIDE_ERROR";
+    }
+  | {
       type: "RESET_DAO";
     };
 
@@ -28,6 +37,10 @@ export type Token = {
   contract_ticker_symbol: string;
   contract_address: string;
   logoUrl: string;
+};
+
+type Error = {
+  message: string;
 };
 
 type StateType = {
@@ -39,6 +52,7 @@ type StateType = {
   isTreasuryLoaded?: boolean;
   token?: Token;
   isTokenLoaded?: boolean;
+  error?: Error;
 };
 
 const initState: StateType = {
@@ -50,6 +64,7 @@ const initState: StateType = {
   isTreasuryLoaded: false,
   token: undefined,
   isTokenLoaded: false,
+  error: undefined,
 };
 
 const daoReducer: Reducer<StateType, ActionType> = (
@@ -80,6 +95,20 @@ const daoReducer: Reducer<StateType, ActionType> = (
           contract_address: action.payload.contract_address,
           logoUrl: action.payload.logoUrl,
         },
+      };
+
+    case "SET_ERROR":
+      return {
+        ...state,
+        error: {
+          message: action.payload.message,
+        },
+      };
+
+    case "HIDE_ERROR":
+      return {
+        ...state,
+        error: undefined,
       };
 
     case "RESET_DAO":

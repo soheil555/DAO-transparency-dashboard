@@ -67,14 +67,24 @@ export default function Currencies() {
 
   useEffect(() => {
     if (id) {
-      axios.get(`/api/dao/${id}/treasury`).then((result) => {
-        setItems(result.data.tokenBalances);
+      axios
+        .get(`/api/dao/${id}/treasury`)
+        .then((result) => {
+          setItems(result.data.tokenBalances);
 
-        dispatch({
-          type: "SET_DAO_TREASURY",
-          payload: { treasury: result.data.treasury },
+          dispatch({
+            type: "SET_DAO_TREASURY",
+            payload: { treasury: result.data.treasury },
+          });
+        })
+        .catch((error) => {
+          dispatch({
+            type: "SET_ERROR",
+            payload: {
+              message: "Failed to load treasury. Please refresh page.",
+            },
+          });
         });
-      });
     }
   }, [id]);
 

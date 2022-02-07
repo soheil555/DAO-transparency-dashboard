@@ -10,7 +10,7 @@ import {
 } from "recharts";
 import { Skeleton, Card } from "@mui/material";
 import { convertToInternationalCurrencySystem } from "./Treasury";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "redux/store";
 import axios from "axios";
 
@@ -21,13 +21,24 @@ interface Data {
 }
 
 export default function HistoricalPortfolio() {
+  const dispatch = useDispatch();
   const [data, setData] = useState<Data[] | null>(null);
   const { id } = useSelector((state: RootState) => state.dao);
 
   useEffect(() => {
-    axios.get(`/api/dao/${id}/historical_treasury`).then((result) => {
-      setData(result.data);
-    });
+    axios
+      .get(`/api/dao/${id}/historical_treasury`)
+      .then((result) => {
+        setData(result.data);
+      })
+      .catch((error) => {
+        dispatch({
+          type: "SET_ERROR",
+          payload: {
+            message: "Failed to load historical treasury. Please refresh page.",
+          },
+        });
+      });
   }, []);
 
   return (

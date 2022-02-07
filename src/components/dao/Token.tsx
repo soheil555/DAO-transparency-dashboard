@@ -1,9 +1,9 @@
 import { Box, Skeleton, Typography, Card, CardContent } from "@mui/material";
 import { useSelector } from "react-redux";
 import { RootState } from "redux/store";
-import { Token as TokenType } from "redux/reducers/daoReducer";
 import { useState, useEffect } from "react";
 import { covalentEth } from "src/services/api";
+import { useDispatch } from "react-redux";
 
 interface Price {
   price: number;
@@ -27,6 +27,7 @@ function calcPriceChange(prices: Price[]) {
 }
 
 export default function Token() {
+  const dispatch = useDispatch();
   const { token } = useSelector((state: RootState) => state.dao);
 
   const [tokenPrice, setTokenPrice] = useState<TokenPrice | null>(null);
@@ -46,16 +47,26 @@ export default function Token() {
         token.contract_address,
         lastMonth,
         now
-      ).then((result) => {
-        const prices = result.data.data[0].prices;
-        const [lastPrice, priceChange, color] = calcPriceChange(prices);
+      )
+        .then((result) => {
+          const prices = result.data.data[0].prices;
+          const [lastPrice, priceChange, color] = calcPriceChange(prices);
 
-        setTokenPrice({
-          lastPrice,
-          priceChange,
-          color,
+          setTokenPrice({
+            lastPrice,
+            priceChange,
+            color,
+          });
+        })
+        .catch((error) => {
+          dispatch({
+            type: "SET_ERROR",
+            payload: {
+              message:
+                "Failed to get historical token prices. Please refresh page",
+            },
+          });
         });
-      });
     }
   }, [token]);
 
