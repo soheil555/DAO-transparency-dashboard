@@ -12,7 +12,7 @@ export default function Error({ message }: { message: string }) {
 
   return (
     <Snackbar
-      anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+      anchorOrigin={{ vertical: "top", horizontal: "center" }}
       open={true}
       autoHideDuration={10000}
       onClose={handleClose}
