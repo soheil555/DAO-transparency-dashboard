@@ -32,6 +32,7 @@ async function daoTreasuryRoute(req: NextApiRequest, res: NextApiResponse) {
       }
 
       const totalTokenBalances: TokenBalance[] = [];
+      let treasury = 0;
 
       for (const address of dao.addresses) {
         const tokenBalances: TokenBalance[] = (
@@ -42,6 +43,8 @@ async function daoTreasuryRoute(req: NextApiRequest, res: NextApiResponse) {
           const tokenExists = totalTokenBalances.find(
             (t) => t.contract_address === tokenBalance.contract_address
           );
+
+          treasury += tokenBalance.quote;
 
           if (tokenExists) {
             tokenExists.balance = new BigNumber(tokenBalance.balance)
@@ -61,7 +64,10 @@ async function daoTreasuryRoute(req: NextApiRequest, res: NextApiResponse) {
         });
       }
 
-      return res.status(200).json(totalTokenBalances);
+      return res.status(200).json({
+        tokenBalances: totalTokenBalances,
+        treasury,
+      });
     default:
       res.setHeader("Allow", ["GET"]);
       res.status(405).end(`Method ${method} is not allowed`);

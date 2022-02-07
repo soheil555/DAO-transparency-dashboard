@@ -8,10 +8,10 @@ import {
   Paper,
   Skeleton,
 } from "@mui/material";
-import { covalentEth } from "../../services/api";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
+import axios from "axios";
 
 interface Item {
   contract_ticker_symbol: string;
@@ -22,20 +22,10 @@ interface Item {
   contract_name: string;
 }
 
-function calcTreasury(items: Item[]) {
-  let treasury = 0;
-  items.forEach((item) => (treasury += item.quote));
-  return treasury;
-}
-
-interface Props {
-  address: string;
-}
-
-export default function Currencies({ address }: Props) {
+export default function Currencies() {
   const [items, setItems] = useState<Item[] | null>(null);
   const dispatch = useDispatch();
-  const { name } = useSelector((state: RootState) => state.dao);
+  const { name, id } = useSelector((state: RootState) => state.dao);
 
   const USDFromatter = new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -66,18 +56,20 @@ export default function Currencies({ address }: Props) {
   }, [name, items]);
 
   useEffect(() => {
-    dispatch({ type: "TOGGLE_DAO_TREASURY_LOADING" });
-    covalentEth.getTokenBalances!(address).then((result) => {
-      const items = result.data.items;
-
-      setItems(items);
-      const treasury = calcTreasury(items);
-      dispatch({ type: "SET_DAO_TREASURY", payload: { treasury } });
+    if (id) {
       dispatch({ type: "TOGGLE_DAO_TREASURY_LOADING" });
 
-      console.log(items);
-    });
-  }, []);
+      axios.get(`/api/dao/${id}/treasury`).then((result) => {
+        setItems(result.data.tokenBalances);
+
+        dispatch({
+          type: "SET_DAO_TREASURY",
+          payload: { treasury: result.data.treasury },
+        });
+        dispatch({ type: "TOGGLE_DAO_TREASURY_LOADING" });
+      });
+    }
+  }, [id]);
 
   return (
     <>

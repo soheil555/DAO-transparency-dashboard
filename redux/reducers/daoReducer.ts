@@ -10,6 +10,7 @@ type ActionType =
   | {
       type: "SET_DAO_INFO";
       payload: {
+        id: number | string;
         name: string;
         description: string;
         logo: string;
@@ -41,6 +42,7 @@ export type Token = {
 type StateType = {
   treasury?: number;
   name?: string;
+  id?: number | string;
   description?: string;
   logo?: string;
   isTreasuryLoading?: boolean;
@@ -50,6 +52,7 @@ type StateType = {
 
 const initState: StateType = {
   treasury: undefined,
+  id: undefined,
   name: undefined,
   description: undefined,
   logo: undefined,
@@ -84,6 +87,7 @@ const daoReducer: Reducer<StateType, ActionType> = (
     case "SET_DAO_INFO":
       return {
         ...state,
+        id: action.payload.id,
         name: action.payload.name,
         description: action.payload.description,
         logo: action.payload.logo,

@@ -3,8 +3,6 @@ import {
   Card,
   CardContent,
   Skeleton,
-  Grid,
-  Paper,
   Typography,
   Tooltip,
 } from "@mui/material";
@@ -13,7 +11,6 @@ import { useState, useEffect } from "react";
 import { covalentEth } from "../../services/api";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../../redux/store";
-import { calcTokenHolders } from "../../utils";
 
 interface Holder {
   address: string;

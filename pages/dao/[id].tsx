@@ -22,6 +22,7 @@ const DAO: NextPage<Props> = ({ dao }) => {
     dispatch({
       type: "SET_DAO_INFO",
       payload: {
+        id: dao.id,
         name: dao.name,
         description: dao.description,
         logo: dao.logoUrl,
@@ -56,7 +57,7 @@ const DAO: NextPage<Props> = ({ dao }) => {
           </Grid>
 
           <Grid item xs={12}>
-            <Currencies address={dao.addresses[0].address} />
+            <Currencies />
           </Grid>
         </Grid>
       </Box>

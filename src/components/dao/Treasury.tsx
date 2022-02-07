@@ -1,15 +1,6 @@
-import {
-  Typography,
-  Card,
-  CardContent,
-  Skeleton,
-  Avatar,
-  Box,
-} from "@mui/material";
+import { Typography, Card, CardContent, Skeleton } from "@mui/material";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
-import { Token } from "../../../redux/reducers/daoReducer";
-import { useState, useEffect } from "react";
 
 export function convertToInternationalCurrencySystem(
   labelValue: number
@@ -27,17 +18,9 @@ export function convertToInternationalCurrencySystem(
 }
 
 export default function Treasury() {
-  const { treasury, isTreasuryLoading, token, isTokenLoaded } = useSelector(
+  const { treasury, isTreasuryLoading } = useSelector(
     (state: RootState) => state.dao
   );
-
-  const [daoToken, setDaoToken] = useState<Token | null>(null);
-
-  useEffect(() => {
-    if (token && isTokenLoaded) {
-      setDaoToken(token);
-    }
-  }, [isTokenLoaded]);
 
   return (
     <Card sx={{ height: 150 }}>

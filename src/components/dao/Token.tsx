@@ -27,9 +27,7 @@ function calcPriceChange(prices: Price[]) {
 }
 
 export default function Token() {
-  const { treasury, isTreasuryLoading, token, isTokenLoaded } = useSelector(
-    (state: RootState) => state.dao
-  );
+  const { token, isTokenLoaded } = useSelector((state: RootState) => state.dao);
 
   const [daoToken, setDaoToken] = useState<TokenType | null>(null);
   const [tokenPrice, setTokenPrice] = useState<TokenPrice | null>(null);
