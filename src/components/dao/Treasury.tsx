@@ -1,6 +1,6 @@
 import { Typography, Card, CardContent, Skeleton } from "@mui/material";
 import { useSelector } from "react-redux";
-import { RootState } from "../../../redux/store";
+import { RootState } from "redux/store";
 
 export function convertToInternationalCurrencySystem(
   labelValue: number
@@ -18,9 +18,7 @@ export function convertToInternationalCurrencySystem(
 }
 
 export default function Treasury() {
-  const { treasury, isTreasuryLoading } = useSelector(
-    (state: RootState) => state.dao
-  );
+  const { treasury } = useSelector((state: RootState) => state.dao);
 
   return (
     <Card sx={{ height: 150 }}>
@@ -29,7 +27,7 @@ export default function Treasury() {
           Treasury
         </Typography>
         <Typography variant="h3" component="div" gutterBottom>
-          {!isTreasuryLoading && treasury ? (
+          {treasury ? (
             "$" + convertToInternationalCurrencySystem(treasury)
           ) : (
             <Skeleton />

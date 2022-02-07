@@ -64,6 +64,8 @@ async function daoTreasuryRoute(req: NextApiRequest, res: NextApiResponse) {
         });
       }
 
+      totalTokenBalances.sort((a, b) => b.quote - a.quote);
+
       return res.status(200).json({
         tokenBalances: totalTokenBalances,
         treasury,

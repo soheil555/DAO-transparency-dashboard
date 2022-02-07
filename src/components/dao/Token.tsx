@@ -1,9 +1,9 @@
 import { Box, Skeleton, Typography, Card, CardContent } from "@mui/material";
 import { useSelector } from "react-redux";
-import { RootState } from "../../../redux/store";
-import { Token as TokenType } from "../../../redux/reducers/daoReducer";
+import { RootState } from "redux/store";
+import { Token as TokenType } from "redux/reducers/daoReducer";
 import { useState, useEffect } from "react";
-import { covalentEth } from "../../services/api";
+import { covalentEth } from "src/services/api";
 
 interface Price {
   price: number;

@@ -17,7 +17,7 @@ type ActionType =
       };
     }
   | {
-      type: "TOGGLE_DAO_TREASURY_LOADING";
+      type: "TOGGLE_DAO_TREASURY_LOADED";
     }
   | {
       type: "SET_DAO_TOKEN";
@@ -45,7 +45,7 @@ type StateType = {
   id?: number | string;
   description?: string;
   logo?: string;
-  isTreasuryLoading?: boolean;
+  isTreasuryLoaded?: boolean;
   token?: Token;
   isTokenLoaded?: boolean;
 };
@@ -56,7 +56,7 @@ const initState: StateType = {
   name: undefined,
   description: undefined,
   logo: undefined,
-  isTreasuryLoading: false,
+  isTreasuryLoaded: false,
   token: undefined,
   isTokenLoaded: false,
 };
@@ -72,10 +72,10 @@ const daoReducer: Reducer<StateType, ActionType> = (
         treasury: action.payload.treasury,
       };
 
-    case "TOGGLE_DAO_TREASURY_LOADING":
+    case "TOGGLE_DAO_TREASURY_LOADED":
       return {
         ...state,
-        isTreasuryLoading: !state.isTreasuryLoading,
+        isTreasuryLoaded: !state.isTreasuryLoaded,
       };
 
     case "TOGGLE_DAO_TOKEN_LOADED":

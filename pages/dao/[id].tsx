@@ -1,15 +1,16 @@
 import type { NextPage, GetServerSideProps } from "next";
 import { Container, Box, Grid } from "@mui/material";
-import Currencies from "../../src/components/dao/Currencies";
-import Treasury from "../../src/components/dao/Treasury";
-import Info from "../../src/components/dao/Info";
-import HistoricalPortfolio from "../../src/components/dao/HistoricalPortfolio";
-import TopTokenHolders from "../../src/components/dao/TopTokenHolders";
-import Token from "../../src/components/dao/Token";
+import Currencies from "src/components/dao/Currencies";
+import Treasury from "src/components/dao/Treasury";
+import Info from "src/components/dao/Info";
+import HistoricalPortfolio from "src/components/dao/HistoricalPortfolio";
+import TopTokenHolders from "src/components/dao/TopTokenHolders";
+import Token from "src/components/dao/Token";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import prisma from "../../prisma/client";
-import { DAO } from "../../prisma/seed";
+import prisma from "prisma/client";
+import { DAO } from "prisma/seed";
+import { useState } from "react";
 
 interface Props {
   dao: DAO;
@@ -17,8 +18,11 @@ interface Props {
 
 const DAO: NextPage<Props> = ({ dao }) => {
   const dispatch = useDispatch();
+  const [daoLoaded, setDaoLoaded] = useState(false);
 
   useEffect(() => {
+    dispatch({ type: "RESET_DAO" });
+
     dispatch({
       type: "SET_DAO_INFO",
       payload: {
@@ -28,40 +32,48 @@ const DAO: NextPage<Props> = ({ dao }) => {
         logo: dao.logoUrl,
       },
     });
+
+    setDaoLoaded(true);
   }, []);
 
   return (
-    <Container maxWidth="lg" sx={{ mt: 4 }}>
-      <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={2} justifyContent="flex-end">
-          <Grid item xs={12}>
-            <Info />
-          </Grid>
+    <>
+      {daoLoaded ? (
+        <Container maxWidth="lg" sx={{ mt: 4 }}>
+          <Box sx={{ flexGrow: 1 }}>
+            <Grid container spacing={2} justifyContent="flex-end">
+              <Grid item xs={12}>
+                <Info />
+              </Grid>
 
-          <Grid item container xs={12} md={4} spacing={2}>
-            <Grid item xs={12}>
-              <Treasury />
+              <Grid item container xs={12} md={4} spacing={2}>
+                <Grid item xs={12}>
+                  <Treasury />
+                </Grid>
+
+                <Grid item xs={12}>
+                  <Token />
+                </Grid>
+              </Grid>
+
+              <Grid item xs={12} md={8}>
+                <HistoricalPortfolio />
+              </Grid>
+
+              <Grid item xs={12}>
+                <TopTokenHolders />
+              </Grid>
+
+              <Grid item xs={12}>
+                <Currencies />
+              </Grid>
             </Grid>
-
-            <Grid item xs={12}>
-              <Token />
-            </Grid>
-          </Grid>
-
-          <Grid item xs={12} md={8}>
-            <HistoricalPortfolio address={dao.addresses[0].address} />
-          </Grid>
-
-          <Grid item xs={12}>
-            <TopTokenHolders />
-          </Grid>
-
-          <Grid item xs={12}>
-            <Currencies />
-          </Grid>
-        </Grid>
-      </Box>
-    </Container>
+          </Box>
+        </Container>
+      ) : (
+        ""
+      )}
+    </>
   );
 };
 

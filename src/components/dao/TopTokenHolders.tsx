@@ -28,8 +28,6 @@ export default function TopTokenHolders() {
         if (result) {
           const items = result.data.items;
           setHolders(items);
-        } else {
-          setHolders([]);
         }
 
         dispatch({
