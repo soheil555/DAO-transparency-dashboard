@@ -9,7 +9,7 @@ import {
   Tooltip,
 } from "recharts";
 import { Skeleton, Card } from "@mui/material";
-import { convertToInternationalCurrencySystem } from "./Treasury";
+import { convertToInternationalCurrencySystem } from "utils";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "redux/store";
 import axios from "axios";

@@ -1,21 +1,7 @@
 import { Typography, Card, CardContent, Skeleton } from "@mui/material";
 import { useSelector } from "react-redux";
 import { RootState } from "redux/store";
-
-export function convertToInternationalCurrencySystem(
-  labelValue: number
-): string {
-  // Nine Zeroes for Billions
-  return Math.abs(Number(labelValue)) >= 1.0e9
-    ? (Math.abs(Number(labelValue)) / 1.0e9).toFixed(1) + "B"
-    : // Six Zeroes for Millions
-    Math.abs(Number(labelValue)) >= 1.0e6
-    ? (Math.abs(Number(labelValue)) / 1.0e6).toFixed(1) + "M"
-    : // Three Zeroes for Thousands
-    Math.abs(Number(labelValue)) >= 1.0e3
-    ? (Math.abs(Number(labelValue)) / 1.0e3).toFixed(1) + "K"
-    : String(Math.abs(Number(labelValue)));
-}
+import { convertToInternationalCurrencySystem } from "utils";
 
 export default function Treasury() {
   const { treasury } = useSelector((state: RootState) => state.dao);

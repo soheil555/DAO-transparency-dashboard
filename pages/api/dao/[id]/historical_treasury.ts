@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { convertToInternationalCurrencySystem } from "src/components/dao/Treasury";
+import { convertToInternationalCurrencySystem } from "utils";
 import prisma from "prisma/client";
 import { covalentEth } from "src/services/api";
 

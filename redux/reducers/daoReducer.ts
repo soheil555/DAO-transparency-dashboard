@@ -21,6 +21,10 @@ type ActionType =
       payload: Token;
     }
   | {
+      type: "SET_DAO_GOVERNANCE";
+      payload: Governance;
+    }
+  | {
       type: "SET_ERROR";
       payload: {
         message: Error["message"];
@@ -39,6 +43,13 @@ export type Token = {
   logoUrl: string;
 };
 
+type Governance = {
+  proposalsCount: number;
+  followersCount: number;
+  name: string;
+  symbol: string;
+};
+
 type Error = {
   message: string;
 };
@@ -53,6 +64,7 @@ type StateType = {
   token?: Token;
   isTokenLoaded?: boolean;
   error?: Error;
+  governance?: Governance;
 };
 
 const initState: StateType = {
@@ -65,6 +77,7 @@ const initState: StateType = {
   token: undefined,
   isTokenLoaded: false,
   error: undefined,
+  governance: undefined,
 };
 
 const daoReducer: Reducer<StateType, ActionType> = (
@@ -94,6 +107,17 @@ const daoReducer: Reducer<StateType, ActionType> = (
           contract_ticker_symbol: action.payload.contract_ticker_symbol,
           contract_address: action.payload.contract_address,
           logoUrl: action.payload.logoUrl,
+        },
+      };
+
+    case "SET_DAO_GOVERNANCE":
+      return {
+        ...state,
+        governance: {
+          name: action.payload.name,
+          symbol: action.payload.symbol,
+          proposalsCount: action.payload.proposalsCount,
+          followersCount: action.payload.followersCount,
         },
       };
 

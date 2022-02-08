@@ -14,6 +14,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "redux/store";
 import Error from "src/components/dao/Error";
+import Governance from "src/components/dao/Governance";
 
 interface Props {
   dao: DAO;
@@ -48,6 +49,10 @@ const DAO: NextPage<Props> = ({ dao }) => {
             <Grid container spacing={2} justifyContent="flex-end">
               <Grid item xs={12}>
                 <Info />
+              </Grid>
+
+              <Grid item xs={4}>
+                <Governance />
               </Grid>
 
               <Grid item container xs={12} md={4} spacing={2}>
