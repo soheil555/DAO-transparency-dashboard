@@ -25,10 +25,12 @@ async function daoTreasuryRoute(req: NextApiRequest, res: NextApiResponse) {
         include: { addresses: { where: { type: "treasury", active: true } } },
       });
 
-      if (!dao || dao.addresses.length === 0) {
-        return res
-          .status(404)
-          .end("DAO not found or DAO has no treasury address");
+      if (!dao) {
+        return res.status(404).end("DAO not found");
+      }
+
+      if (dao.addresses.length === 0) {
+        return res.status(200).json({});
       }
 
       const totalTokenBalances: TokenBalance[] = [];
