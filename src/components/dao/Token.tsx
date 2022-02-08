@@ -4,6 +4,7 @@ import { RootState } from "redux/store";
 import { useState, useEffect } from "react";
 import { covalentEth } from "src/services/api";
 import { useDispatch } from "react-redux";
+import Title from "./Title";
 
 interface Price {
   price: number;
@@ -50,6 +51,13 @@ export default function Token() {
       )
         .then((result) => {
           const prices = result.data.data.prices[0].prices;
+
+          dispatch({
+            type: "SET_DAO_TOKEN_PRICES",
+            payload: prices,
+          });
+
+          console.log(prices);
           const [lastPrice, priceChange, color] = calcPriceChange(prices);
 
           setTokenPrice({
@@ -73,9 +81,7 @@ export default function Token() {
   return (
     <Card sx={{ height: 300 }}>
       <CardContent>
-        <Typography sx={{ fontSize: 18 }} color="text.secondary" gutterBottom>
-          DAO Token
-        </Typography>
+        <Title>DAO Token</Title>
 
         <Box component="div">
           {token ? (

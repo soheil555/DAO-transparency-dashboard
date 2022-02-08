@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "redux/store";
 import axios from "axios";
+import Title from "./Title";
 
 interface Item {
   contract_ticker_symbol: string;
@@ -104,7 +105,7 @@ export default function Currencies() {
 
   return (
     <>
-      {" "}
+      <Title>Currencies</Title>{" "}
       {items ? (
         <TableContainer sx={{ height: 400 }} component={Paper}>
           <Table stickyHeader sx={{ minWidth: 700 }} aria-label="currencies">

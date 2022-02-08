@@ -7,11 +7,12 @@ import {
   Tooltip,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { covalentEth } from "src/services/api";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "redux/store";
 import BigNumber from "bignumber.js";
+import Title from "./Title";
 
 interface Holder {
   address: string;
@@ -27,8 +28,9 @@ function calcHoldPercentage(_balance: string, _totalSupply: string) {
 }
 
 export default function TopTokenHolders() {
-  const [holders, setHolders] = useState<Holder[] | null>(null);
-  const { token } = useSelector((state: RootState) => state.dao);
+  const { token, topTokenHolders } = useSelector(
+    (state: RootState) => state.dao
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -37,7 +39,10 @@ export default function TopTokenHolders() {
         .then((result) => {
           if (result) {
             const items = result.data.items;
-            setHolders(items);
+            dispatch({
+              type: "SET_DAO_TOP_TOKEN_HOLDERS",
+              payload: items,
+            });
           }
         })
         .catch((error) => {
@@ -53,8 +58,8 @@ export default function TopTokenHolders() {
 
   return (
     <>
-      {" "}
-      {holders ? (
+      <Title>Top '{token?.contract_ticker_symbol}' Token Holders</Title>{" "}
+      {topTokenHolders ? (
         <Card
           sx={{
             height: 250,
@@ -65,7 +70,7 @@ export default function TopTokenHolders() {
             px: 2,
           }}
         >
-          {holders.map((holder, index) => {
+          {topTokenHolders.map((holder, index) => {
             return (
               <Card key={index} sx={{ minWidth: 200 }}>
                 <CardContent>

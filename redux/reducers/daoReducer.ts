@@ -25,10 +25,20 @@ type ActionType =
       payload: Governance;
     }
   | {
+      type: "SET_DAO_TOP_TOKEN_HOLDERS";
+      payload: TokenHolder[];
+    }
+  | {
+      type: "SET_DAO_HISTORICAL_TREASURY";
+      payload: Treasury[];
+    }
+  | {
+      type: "SET_DAO_TOKEN_PRICES";
+      payload: TokenPrice[];
+    }
+  | {
       type: "SET_ERROR";
-      payload: {
-        message: Error["message"];
-      };
+      payload: Error;
     }
   | {
       type: "HIDE_ERROR";
@@ -50,6 +60,24 @@ type Governance = {
   symbol: string;
 };
 
+type TokenHolder = {
+  address: string;
+  balance: string;
+  total_supply: string;
+};
+
+type Treasury = {
+  date: string;
+  treasury: number;
+  treasuryShort: string;
+};
+
+type TokenPrice = {
+  date: string;
+  price: number;
+  contract_metadata: object;
+};
+
 type Error = {
   message: string;
 };
@@ -63,6 +91,9 @@ type StateType = {
   token?: Token;
   error?: Error;
   governance?: Governance;
+  topTokenHolders?: TokenHolder[];
+  historicalTreasury?: Treasury[];
+  tokenPrices?: TokenPrice[];
 };
 
 const initState: StateType = {
@@ -74,6 +105,9 @@ const initState: StateType = {
   token: undefined,
   error: undefined,
   governance: undefined,
+  topTokenHolders: undefined,
+  historicalTreasury: undefined,
+  tokenPrices: undefined,
 };
 
 const daoReducer: Reducer<StateType, ActionType> = (
@@ -115,6 +149,24 @@ const daoReducer: Reducer<StateType, ActionType> = (
           proposalsCount: action.payload.proposalsCount,
           followersCount: action.payload.followersCount,
         },
+      };
+
+    case "SET_DAO_TOP_TOKEN_HOLDERS":
+      return {
+        ...state,
+        topTokenHolders: action.payload,
+      };
+
+    case "SET_DAO_HISTORICAL_TREASURY":
+      return {
+        ...state,
+        historicalTreasury: action.payload,
+      };
+
+    case "SET_DAO_TOKEN_PRICES":
+      return {
+        ...state,
+        tokenPrices: action.payload,
       };
 
     case "SET_ERROR":

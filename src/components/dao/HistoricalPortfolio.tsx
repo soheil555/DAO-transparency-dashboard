@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import {
   LineChart,
   Line,
@@ -13,6 +13,7 @@ import { convertToInternationalCurrencySystem } from "utils";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "redux/store";
 import axios from "axios";
+import Title from "./Title";
 
 interface Data {
   date: string;
@@ -22,14 +23,18 @@ interface Data {
 
 export default function HistoricalPortfolio() {
   const dispatch = useDispatch();
-  const [data, setData] = useState<Data[] | null>(null);
-  const { id } = useSelector((state: RootState) => state.dao);
+  const { id, historicalTreasury } = useSelector(
+    (state: RootState) => state.dao
+  );
 
   useEffect(() => {
     axios
       .get(`/api/dao/${id}/historical_treasury`)
       .then((result) => {
-        setData(result.data);
+        dispatch({
+          type: "SET_DAO_HISTORICAL_TREASURY",
+          payload: result.data,
+        });
       })
       .catch((error) => {
         dispatch({
@@ -43,10 +48,11 @@ export default function HistoricalPortfolio() {
 
   return (
     <>
-      {data ? (
+      <Title>DAO Treasury over last month</Title>
+      {historicalTreasury ? (
         <Card sx={{ padding: 2 }}>
           <ResponsiveContainer width="100%" height={455}>
-            <LineChart data={data}>
+            <LineChart data={historicalTreasury}>
               <Line type="monotone" dataKey="treasury" stroke="#8884d8" />
               <CartesianGrid stroke="#ccc" />
               <XAxis dataKey="date" />

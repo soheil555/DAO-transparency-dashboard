@@ -15,6 +15,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "redux/store";
 import Error from "src/components/dao/Error";
 import Governance from "src/components/dao/Governance";
+import TransparencyScore from "src/components/dao/TransparencyScore";
 
 interface Props {
   dao: DAO;
@@ -46,9 +47,13 @@ const DAO: NextPage<Props> = ({ dao }) => {
       {daoLoaded ? (
         <Container maxWidth="lg" sx={{ mt: 4 }}>
           <Box sx={{ flexGrow: 1 }}>
-            <Grid container spacing={2} justifyContent="flex-end">
+            <Grid container spacing={2} justifyContent="center">
               <Grid item xs={12}>
                 <Info />
+              </Grid>
+
+              <Grid item xs={12} md={6}>
+                <TransparencyScore />
               </Grid>
 
               <Grid item container xs={12} spacing={2}>
