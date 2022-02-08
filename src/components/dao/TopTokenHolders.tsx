@@ -11,10 +11,19 @@ import { useState, useEffect } from "react";
 import { covalentEth } from "src/services/api";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "redux/store";
+import BigNumber from "bignumber.js";
 
 interface Holder {
   address: string;
   balance: string;
+  total_supply: string;
+}
+
+function calcHoldPercentage(_balance: string, _totalSupply: string) {
+  const balance = new BigNumber(_balance);
+  const totalSupply = new BigNumber(_totalSupply);
+
+  return balance.dividedBy(totalSupply).multipliedBy(100).toFixed(2);
 }
 
 export default function TopTokenHolders() {
@@ -79,7 +88,11 @@ export default function TopTokenHolders() {
                     Balance
                   </Typography>
                   <Tooltip title={holder.balance} arrow>
-                    <Typography>{holder.balance.slice(0, 9)}...</Typography>
+                    <Typography>
+                      {holder.balance.slice(0, 9)}... (
+                      {calcHoldPercentage(holder.balance, holder.total_supply)}
+                      %)
+                    </Typography>
                   </Tooltip>
                 </CardContent>
               </Card>

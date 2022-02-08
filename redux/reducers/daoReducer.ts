@@ -60,9 +60,7 @@ type StateType = {
   id?: number | string;
   description?: string;
   logo?: string;
-  isTreasuryLoaded?: boolean;
   token?: Token;
-  isTokenLoaded?: boolean;
   error?: Error;
   governance?: Governance;
 };
@@ -73,9 +71,7 @@ const initState: StateType = {
   name: undefined,
   description: undefined,
   logo: undefined,
-  isTreasuryLoaded: false,
   token: undefined,
-  isTokenLoaded: false,
   error: undefined,
   governance: undefined,
 };
