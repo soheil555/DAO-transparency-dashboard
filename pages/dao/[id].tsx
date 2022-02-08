@@ -51,21 +51,20 @@ const DAO: NextPage<Props> = ({ dao }) => {
                 <Info />
               </Grid>
 
-              <Grid item xs={4}>
-                <Governance />
-              </Grid>
-
-              <Grid item container xs={12} md={4} spacing={2}>
-                <Grid item xs={12}>
+              <Grid item container xs={12} spacing={2}>
+                <Grid item xs={12} md={4}>
+                  <Governance />
+                </Grid>
+                <Grid item xs={12} md={4}>
                   <Treasury />
                 </Grid>
 
-                <Grid item xs={12}>
+                <Grid item xs={12} md={4}>
                   <Token />
                 </Grid>
               </Grid>
 
-              <Grid item xs={12} md={8}>
+              <Grid item xs={12}>
                 <HistoricalPortfolio />
               </Grid>
 

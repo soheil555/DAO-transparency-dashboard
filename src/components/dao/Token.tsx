@@ -49,7 +49,7 @@ export default function Token() {
         now
       )
         .then((result) => {
-          const prices = result.data.data[0].prices;
+          const prices = result.data.data.prices[0].prices;
           const [lastPrice, priceChange, color] = calcPriceChange(prices);
 
           setTokenPrice({
@@ -71,7 +71,7 @@ export default function Token() {
   }, [token]);
 
   return (
-    <Card sx={{ height: 320 }}>
+    <Card sx={{ height: 300 }}>
       <CardContent>
         <Typography sx={{ fontSize: 18 }} color="text.secondary" gutterBottom>
           DAO Token
@@ -112,7 +112,7 @@ export default function Token() {
           Token Price
         </Typography>
 
-        <Typography variant="h3" component="div" gutterBottom>
+        <Typography variant="h3" component="div">
           {tokenPrice ? "$" + tokenPrice.lastPrice : <Skeleton />}
         </Typography>
 

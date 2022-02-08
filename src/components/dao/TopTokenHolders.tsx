@@ -19,7 +19,7 @@ interface Holder {
 
 export default function TopTokenHolders() {
   const [holders, setHolders] = useState<Holder[] | null>(null);
-  const { token, isTokenLoaded } = useSelector((state: RootState) => state.dao);
+  const { token } = useSelector((state: RootState) => state.dao);
   const dispatch = useDispatch();
 
   useEffect(() => {

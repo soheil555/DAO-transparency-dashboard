@@ -41,7 +41,7 @@ export class ApiCore {
     if (options.getTokenHolders) {
       this.getTokenHolders = (
         address: string,
-        pageNumber: number = 1,
+        pageNumber: number = 0,
         pageSize: number = 10
       ) => {
         return apiProvider.getTokenHolders(

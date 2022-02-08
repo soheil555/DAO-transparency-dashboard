@@ -82,7 +82,10 @@ async function daoHistoricalTreasuryRoute(
           address.address
         );
 
-        totalHistoricalItems = [...totalHistoricalItems, ...historical.items];
+        totalHistoricalItems = [
+          ...totalHistoricalItems,
+          ...historical.data.items,
+        ];
       }
 
       const historicalTreasury = calcHistoricalPortfolio(totalHistoricalItems);

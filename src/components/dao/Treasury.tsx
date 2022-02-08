@@ -7,7 +7,7 @@ export default function Treasury() {
   const { treasury } = useSelector((state: RootState) => state.dao);
 
   return (
-    <Card sx={{ height: 150 }}>
+    <Card sx={{ height: 300 }}>
       <CardContent>
         <Typography sx={{ fontSize: 18 }} color="text.secondary" gutterBottom>
           Treasury
