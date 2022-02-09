@@ -178,9 +178,9 @@ async function main() {
 
   if (existsSync(dataPath)) {
     data = JSON.parse(readFileSync(dataPath, "utf-8"));
+  } else {
+    data = await updateData(data, dataPath);
   }
-
-  data = await updateData(data, dataPath);
 
   console.log("[+]Writing data to database");
 
