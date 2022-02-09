@@ -53,26 +53,26 @@ export type Token = {
   logoUrl: string;
 };
 
-type Governance = {
+export type Governance = {
   proposalsCount: number;
   followersCount: number;
   name: string;
   symbol: string;
 };
 
-type TokenHolder = {
+export type TokenHolder = {
   address: string;
   balance: string;
   total_supply: string;
 };
 
-type Treasury = {
+export type Treasury = {
   date: string;
   treasury: number;
   treasuryShort: string;
 };
 
-type TokenPrice = {
+export type TokenPrice = {
   date: string;
   price: number;
   contract_metadata: object;

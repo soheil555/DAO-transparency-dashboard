@@ -242,7 +242,7 @@
   },
   {
     "name": "Synthetix",
-    "description": "<p>The Synthetix protocol serves permissionless transformation of multiple crypto, fiat and commodities derivatives into thus synthetic, single tokens, and the trading of those through its DEX to wider DeFi. \n<br>The Synthetix organization works t...</p>",
+    "description": "The Synthetix protocol serves permissionless transformation of multiple crypto, fiat and commodities derivatives into thus synthetic, single tokens, and the trading of those through its DEX to wider DeFi. \nThe Synthetix organization works t...",
     "logoUrl": "https://deepdao-uploads.s3.us-east-2.amazonaws.com/assets/dao/logo/synthetix.png",
     "addresses": [
       {
@@ -347,7 +347,7 @@
   },
   {
     "name": "OlympusDAO",
-    "description": "<p>The Olympus protocol sets up a decentralized reserve token that's collateralled by crypto assets rather than pegged to $US. It relies on diverse, protocol-owned over-collateralization and native compounding incentives.\n<br>Community governance ...</p>",
+    "description": "The Olympus protocol sets up a decentralized reserve token that's collateralled by crypto assets rather than pegged to $US. It relies on diverse, protocol-owned over-collateralization and native compounding incentives.\nCommunity governance ...",
     "logoUrl": "https://deepdao-uploads.s3.us-east-2.amazonaws.com/assets/snapshots/spaces/olympusdao.eth.png",
     "addresses": [
       {
@@ -409,7 +409,7 @@
   },
   {
     "name": "ENS",
-    "description": "<p>The Ethereum Name Service is the provider of unique name.eth blockchain addresses, used as cross-web3 avatar profiles. Its DAO is currently heading full governance by the community of .eth holders.\n<br>-  See current </p>",
+    "description": "The Ethereum Name Service is the provider of unique name.eth blockchain addresses, used as cross-web3 avatar profiles. Its DAO is currently heading full governance by the community of .eth holders.\n-  See current ",
     "logoUrl": "https://deepdao-uploads.s3.us-east-2.amazonaws.com/assets/snapshots/spaces/ens.eth.png",
     "addresses": [
       {
@@ -452,7 +452,7 @@
   },
   {
     "name": "Decentraland",
-    "description": "<p>A VR metaverse plaftorm DAO-controlled by users, Decentraland offers land plots and tools for users to access, play, create, exhibit, monetize and trade digital content; See also a more thorough </p>",
+    "description": "A VR metaverse plaftorm DAO-controlled by users, Decentraland offers land plots and tools for users to access, play, create, exhibit, monetize and trade digital content; See also a more thorough ",
     "logoUrl": "https://deepdao-uploads.s3.us-east-2.amazonaws.com/assets/snapshots/spaces/snapshot.dcl.eth.png",
     "addresses": [
       {
@@ -1082,7 +1082,7 @@
   },
   {
     "name": "Index",
-    "description": "<p>Index Coop offers fully collateralized indices of wide DeFi exposure to web3 assets and industries. Its governing DAO operates in working groups, rewards contributors, and applies collective meta-governance in held tokens' DAOs.\n<br>See </p>",
+    "description": "Index Coop offers fully collateralized indices of wide DeFi exposure to web3 assets and industries. Its governing DAO operates in working groups, rewards contributors, and applies collective meta-governance in held tokens' DAOs.\nSee ",
     "logoUrl": "https://deepdao-uploads.s3.us-east-2.amazonaws.com/assets/snapshots/spaces/index-coop.eth.png",
     "addresses": [
       {
@@ -1113,7 +1113,7 @@
   },
   {
     "name": "yearn.finance",
-    "description": "<p>The yearn.finance protocol offers a suite of DeFi products for yield farming, lending and rewards aggregation. These are conducted in protocol y-Vaults that act upon defined strategy/ies - specific investment routs that apply designated DeFi to...</p>",
+    "description": "The yearn.finance protocol offers a suite of DeFi products for yield farming, lending and rewards aggregation. These are conducted in protocol y-Vaults that act upon defined strategy/ies - specific investment routs that apply designated DeFi to...",
     "logoUrl": "https://deepdao-uploads.s3.us-east-2.amazonaws.com/assets/dao/logo/yearn.png",
     "addresses": [
       {
@@ -1286,7 +1286,7 @@
   },
   {
     "name": "MANTRA DAO",
-    "description": "<p>MantraDAO runs a lending-focused DeFi protocol to leverage the potential of multi-chain infrastructure &amp; tools for chain-versatile assets and collateralled stablecoin to follow.\nAt its current stage, the DAO is under the complete hold of its fo...</p>",
+    "description": "MantraDAO runs a lending-focused DeFi protocol to leverage the potential of multi-chain infrastructure &amp; tools for chain-versatile assets and collateralled stablecoin to follow.\nAt its current stage, the DAO is under the complete hold of its fo...",
     "logoUrl": "https://deepdao-uploads.s3.us-east-2.amazonaws.com/assets/snapshots/spaces/mantra-dao.png",
     "addresses": [
       {
@@ -1671,7 +1671,7 @@
   },
   {
     "name": "SquiggleDAO",
-    "description": "<p>Squiggle DAO is founder of the Art Blocks project of generative web3 art and the creator-curator of \"Chromie Squiggles\" generative design. It aims to fund &amp; launch promising generative artists whose designs it then randomly iterates on-demand t...</p>",
+    "description": "Squiggle DAO is founder of the Art Blocks project of generative web3 art and the creator-curator of \"Chromie Squiggles\" generative design. It aims to fund &amp; launch promising generative artists whose designs it then randomly iterates on-demand t...",
     "logoUrl": "https://deepdao-uploads.s3.us-east-2.amazonaws.com/assets/snapshots/spaces/squiggledao.eth.png",
     "addresses": [
       {
@@ -1985,7 +1985,7 @@
   },
   {
     "name": "Shark DAO",
-    "description": "<p>Shark DAO was established to purchase Nouns NFTs, and use accumulated assets to co-govern in Nouns DAO and take part in the development of the its ecosystem. Its treasury is currently controlled by a multisig and via a Juicebox account.\n<br>Sha...</p>",
+    "description": "Shark DAO was established to purchase Nouns NFTs, and use accumulated assets to co-govern in Nouns DAO and take part in the development of the its ecosystem. Its treasury is currently controlled by a multisig and via a Juicebox account.\nSha...",
     "logoUrl": "https://deepdao-uploads.s3.us-east-2.amazonaws.com/assets/snapshots/spaces/sharkdao.eth.png",
     "addresses": [
       {
@@ -2467,7 +2467,7 @@
   },
   {
     "name": "JuiceboxDAO",
-    "description": "<p>Juicebox is a DAO-governed web3-oriented tool for community fundraising and flexible allocation of raised funds.; See <a target=\"_blank\" href=\"https://gateway.pinata.cloud/ipfs/QmVRdgYaa6Vp4XJE9435r77pgBzT68AakFSr5b1NTrnZmQ\">governance delibera...</a></p>",
+    "description": "Juicebox is a DAO-governed web3-oriented tool for community fundraising and flexible allocation of raised funds.; See governance delibera...",
     "logoUrl": "https://deepdao-uploads.s3.us-east-2.amazonaws.com/assets/snapshots/spaces/jbdao.eth.png",
     "addresses": [
       {
@@ -3036,7 +3036,7 @@
   },
   {
     "name": "Constitution",
-    "description": "<p>ConstitutionDAO is a web3 crowdfunding operation set to bid for a genuine copy of the US Constitution on a 18 Nov. 2021 auction. Upon not winning the piece, bid for a genuine copy of the US Constitution . It raised over $40M but not enough to w...</p>",
+    "description": "ConstitutionDAO is a web3 crowdfunding operation set to bid for a genuine copy of the US Constitution on a 18 Nov. 2021 auction. Upon not winning the piece, bid for a genuine copy of the US Constitution . It raised over $40M but not enough to w...",
     "logoUrl": "https://deepdao-uploads.s3.us-east-2.amazonaws.com/assets/dao/logo/constitution.jpeg",
     "addresses": [
       {
@@ -3251,7 +3251,7 @@
   },
   {
     "name": "Pangolin",
-    "description": "<p>Pangolin is a community-owned Decentralized EXchange for various Ethereum and Avalanche networks DeFi assets. Originally an Ava Labs product handed over to community leadership, allocating 100% of its minted token to the community.</p>\n<p><br>O...</p>",
+    "description": "Pangolin is a community-owned Decentralized EXchange for various Ethereum and Avalanche networks DeFi assets. Originally an Ava Labs product handed over to community leadership, allocating 100% of its minted token to the community.\nO...",
     "logoUrl": "https://deepdao-uploads.s3.us-east-2.amazonaws.com/assets/snapshots/spaces/pangolindex.eth.png",
     "addresses": [
       {
@@ -3491,7 +3491,7 @@
   },
   {
     "name": "Enzyme Finance",
-    "description": "<p>Enzyme Finance is a protocol for DeFi asset management and investments. Its non-custodial, forkable \"Funds\" offer permissionless participation in tracked, transparent strategies of investment combinations.</p>\n\t<p><br>Enzyme is among DeFi pione...</p>",
+    "description": "Enzyme Finance is a protocol for DeFi asset management and investments. Its non-custodial, forkable \"Funds\" offer permissionless participation in tracked, transparent strategies of investment combinations.\n\tEnzyme is among DeFi pione...",
     "logoUrl": "https://deepdao-uploads.s3.us-east-2.amazonaws.com/assets/snapshots/spaces/enzymefinance.eth.png",
     "addresses": [
       {
@@ -3806,7 +3806,7 @@
   },
   {
     "name": "MeebitsDAO",
-    "description": "<p>Meebits DAO is a BUIDL hub for NFTs. It revolves around Lavra Labs.' Meebits NFT avatars and includes a tokenized sandbox metaverse of user-created items &amp; games, a marketplace and creator fund.\n<br>See </p>",
+    "description": "Meebits DAO is a BUIDL hub for NFTs. It revolves around Lavra Labs.' Meebits NFT avatars and includes a tokenized sandbox metaverse of user-created items &amp; games, a marketplace and creator fund.\nSee ",
     "logoUrl": "https://deepdao-uploads.s3.us-east-2.amazonaws.com/assets/snapshots/spaces/manekari.eth.png",
     "addresses": [
       {
@@ -3844,7 +3844,7 @@
   },
   {
     "name": "Meter Governance MTRG",
-    "description": "<p>Meter is a DeFi-native layer1 blockchain aimed to facilitate Smart Contract scaling and interoperability. Goverend by MTRG token holders, it is also the issuer of MTR stablecoin that's pegged to world electricity prices.\n<br>The governance toke...</p>",
+    "description": "Meter is a DeFi-native layer1 blockchain aimed to facilitate Smart Contract scaling and interoperability. Goverend by MTRG token holders, it is also the issuer of MTR stablecoin that's pegged to world electricity prices.\nThe governance toke...",
     "logoUrl": "https://deepdao-uploads.s3.us-east-2.amazonaws.com/assets/snapshots/spaces/meter-mainnet.eth.png",
     "addresses": [
       {
