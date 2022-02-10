@@ -17,10 +17,10 @@ DAO Transparency Dashboard powered by **Covalent API**.
 
 1.  Clone the project
 
-```bash
-git clone https://github.com/soheil555/DAO-transparency-dashboard.git
-cd DAO-transparency-dashboard
-```
+   ```bash
+    git clone https://github.com/soheil555/DAO-transparency-dashboard.git
+    cd DAO-transparency-dashboard
+   ```
 
 2. Create .`env` file
 

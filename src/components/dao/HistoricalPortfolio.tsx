@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   LineChart,
   Line,
@@ -23,11 +23,14 @@ interface Data {
 
 export default function HistoricalPortfolio() {
   const dispatch = useDispatch();
+  const [count, setCount] = useState(0);
   const { id, historicalTreasury } = useSelector(
     (state: RootState) => state.dao
   );
 
   useEffect(() => {
+    console.log("here historical");
+
     axios
       .get(`/api/dao/${id}/historical_treasury`)
       .then((result) => {
@@ -37,14 +40,21 @@ export default function HistoricalPortfolio() {
         });
       })
       .catch((error) => {
-        dispatch({
-          type: "SET_ERROR",
-          payload: {
-            message: "Failed to load historical treasury. Please refresh page.",
-          },
-        });
+        if (count < 5) {
+          setTimeout(() => {
+            setCount(count + 1);
+          }, 300);
+        } else {
+          dispatch({
+            type: "SET_ERROR",
+            payload: {
+              message:
+                "Failed to load historical treasury. Please refresh page.",
+            },
+          });
+        }
       });
-  }, []);
+  }, [count]);
 
   return (
     <>
