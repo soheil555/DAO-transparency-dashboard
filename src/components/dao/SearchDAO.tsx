@@ -1,7 +1,8 @@
 import { Box, TextField, Autocomplete } from "@mui/material";
 import { useState } from "react";
-import DAO from "./DAO";
-import { DAO as DAOType } from "../../prisma/seed";
+import { DAO as DAOType } from "prisma/seed";
+import { LoadingButton } from "@mui/lab";
+import { ArrowRightAlt } from "@mui/icons-material";
 
 interface Props {
   daos: DAOType[];
@@ -9,27 +10,26 @@ interface Props {
 
 export default function SearchDAO({ daos }: Props) {
   const [dao, setDAO] = useState<DAOType | null>(null);
+  const [loading, setLoading] = useState(false);
 
   return (
     <Box
       sx={{
-        width: 500,
+        width: 800,
         maxWidth: "100%",
         display: "flex",
-        flexDirection: "column",
+        flexDirection: "row",
         alignItems: "center",
       }}
     >
       <Autocomplete
         onChange={(event: any, value: DAOType | null) => {
-          if (value && JSON.stringify(value) != JSON.stringify(dao)) {
-            setDAO(value);
-          }
+          setDAO(value);
         }}
         disablePortal
         options={daos}
         fullWidth
-        sx={{ mb: 2 }}
+        sx={{ mr: 2 }}
         getOptionLabel={(option) => option.name}
         renderInput={(params) => <TextField {...params} label="Search DAOS" />}
         renderOption={(props, option) => (
@@ -51,8 +51,20 @@ export default function SearchDAO({ daos }: Props) {
           </Box>
         )}
       />
-
-      {dao && <DAO dao={dao} />}
+      <LoadingButton
+        href={`/dao/${dao?.id}`}
+        endIcon={<ArrowRightAlt />}
+        variant="contained"
+        size="small"
+        onClick={() => {
+          setLoading(true);
+        }}
+        loading={loading}
+        loadingPosition="end"
+        disabled={loading || !dao}
+      >
+        Start Analayze
+      </LoadingButton>
     </Box>
   );
 }

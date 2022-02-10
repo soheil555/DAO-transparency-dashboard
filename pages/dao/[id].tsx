@@ -16,12 +16,14 @@ import { RootState } from "redux/store";
 import Error from "src/components/dao/Error";
 import Governance from "src/components/dao/Governance";
 import TransparencyScore from "src/components/dao/TransparencyScore";
+import SearchDAO from "src/components/dao/SearchDAO";
 
 interface Props {
   dao: DAO;
+  daos: DAO[];
 }
 
-const DAO: NextPage<Props> = ({ dao }) => {
+const DAO: NextPage<Props> = ({ dao, daos }) => {
   const dispatch = useDispatch();
   const [daoLoaded, setDaoLoaded] = useState(false);
   const { error } = useSelector((state: RootState) => state.dao);
@@ -48,6 +50,10 @@ const DAO: NextPage<Props> = ({ dao }) => {
         <Container maxWidth="lg" sx={{ mt: 4 }}>
           <Box sx={{ flexGrow: 1 }}>
             <Grid container spacing={2} justifyContent="center">
+              <Grid item xs={12} md={8}>
+                <SearchDAO daos={daos} />
+              </Grid>
+
               <Grid item xs={12}>
                 <Info />
               </Grid>
@@ -109,8 +115,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 
+  const daos = await prisma.dAO.findMany();
+
   return {
-    props: { dao },
+    props: { dao, daos },
   };
 };
 

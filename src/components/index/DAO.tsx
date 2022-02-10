@@ -1,4 +1,4 @@
-import { DAO as DAOType } from "../../prisma/seed";
+import { DAO as DAOType } from "prisma/seed";
 import {
   Card,
   Typography,

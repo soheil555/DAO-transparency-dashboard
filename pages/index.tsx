@@ -1,8 +1,8 @@
 import { Container, Box } from "@mui/material";
 import type { NextPage, GetServerSideProps } from "next";
-import SearchDAO from "../src/components/SearchDAO";
-import prisma from "../prisma/client";
-import { DAO } from "../prisma/seed";
+import SearchDAO from "src/components/index/SearchDAO";
+import prisma from "prisma/client";
+import { DAO } from "prisma/seed";
 
 interface Props {
   daos: DAO[];
