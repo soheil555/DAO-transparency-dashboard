@@ -107,7 +107,7 @@ export default function SearchDAO() {
         loadingPosition="end"
         disabled={analyzeLoading || !dao}
       >
-        Start Analayze
+        Start To Analyze
       </LoadingButton>
     </Box>
   );

@@ -75,12 +75,23 @@ async function daoHistoricalTreasuryRoute(
 
       let totalHistoricalItems: Item[] = [];
 
+      const getHistoricalData: (address: string) => any = async (
+        address: string
+      ) => {
+        let historical: any;
+        try {
+          historical = await covalentEth.getHistoricalPortfolioValue!(address);
+        } catch (err) {
+          return await getHistoricalData(address);
+        }
+
+        return historical;
+      };
+
       for (const address of dao.addresses) {
         let historical: any;
 
-        historical = await covalentEth.getHistoricalPortfolioValue!(
-          address.address
-        );
+        historical = await getHistoricalData(address.address);
 
         const items = historical.data.items.filter((item: any) => {
           if (item.holdings.length && item.holdings[0].quote_rate <= 100000) {

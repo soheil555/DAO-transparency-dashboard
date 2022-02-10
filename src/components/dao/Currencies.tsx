@@ -26,7 +26,7 @@ interface Item {
 export default function Currencies() {
   const [items, setItems] = useState<Item[] | null>(null);
   const dispatch = useDispatch();
-  const { name, id } = useSelector((state: RootState) => state.dao);
+  const { name, id, governance } = useSelector((state: RootState) => state.dao);
 
   const USDFromatter = new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -36,13 +36,16 @@ export default function Currencies() {
   const numberFormatter = new Intl.NumberFormat();
 
   useEffect(() => {
-    if (name && items) {
+    if (name && items && governance) {
       const daoName = name.toLowerCase().replace("dao", "").trim();
 
       const daoTokens = items.filter(
         (item: Item) =>
           item.contract_name.toLowerCase().includes(daoName) ||
-          item.contract_ticker_symbol.toLowerCase().includes(daoName)
+          item.contract_ticker_symbol.toLowerCase().includes(daoName) ||
+          item.contract_ticker_symbol
+            .toLowerCase()
+            .includes(governance.symbol.toLowerCase())
       );
 
       let daoToken: Item | undefined;
@@ -80,7 +83,7 @@ export default function Currencies() {
         });
       }
     }
-  }, [name, items]);
+  }, [name, items, governance]);
 
   useEffect(() => {
     if (id) {

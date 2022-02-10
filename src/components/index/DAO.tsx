@@ -54,7 +54,7 @@ export default function DAO({ dao }: Props) {
             loadingPosition="end"
             disabled={loading}
           >
-            Start Analayze
+            Start To Analyze
           </LoadingButton>
         </CardActions>
       </Card>
