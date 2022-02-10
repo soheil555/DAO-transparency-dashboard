@@ -10,6 +10,7 @@ interface TokenBalance {
   logo_url: string;
   balance: string;
   quote: number;
+  quote_rate?: number;
 }
 
 async function daoTreasuryRoute(req: NextApiRequest, res: NextApiResponse) {
@@ -41,10 +42,24 @@ async function daoTreasuryRoute(req: NextApiRequest, res: NextApiResponse) {
           await covalentEth.getTokenBalances!(address.address)
         ).data.items;
 
-        tokenBalances.forEach((tokenBalance) => {
+        for (const tokenBalance of tokenBalances) {
           const tokenExists = totalTokenBalances.find(
             (t) => t.contract_address === tokenBalance.contract_address
           );
+
+          if (
+            !tokenBalance.quote_rate ||
+            tokenBalance.quote_rate! > 100000 ||
+            tokenBalance.quote_rate! <= 0 ||
+            tokenBalance.quote <= 0
+          ) {
+            console.log(tokenBalance);
+            continue;
+          }
+
+          // console.log("********************");
+          // console.log(tokenBalance);
+          // console.log("********************");
 
           treasury += tokenBalance.quote;
 
@@ -63,7 +78,7 @@ async function daoTreasuryRoute(req: NextApiRequest, res: NextApiResponse) {
               contract_ticker_symbol: tokenBalance.contract_ticker_symbol,
             });
           }
-        });
+        }
       }
 
       totalTokenBalances.sort((a, b) => b.quote - a.quote);

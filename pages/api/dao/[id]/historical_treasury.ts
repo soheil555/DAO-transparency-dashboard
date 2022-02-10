@@ -21,6 +21,10 @@ function calcHistoricalPortfolio(items: Item[]) {
   } = {};
 
   for (const item of items) {
+    // console.log("********************");
+    // console.log(item);
+    // console.log("********************");
+
     for (const holding of item.holdings) {
       if (data[holding.timestamp]) {
         data[holding.timestamp] += holding.close.quote;
@@ -82,10 +86,13 @@ async function daoHistoricalTreasuryRoute(
           address.address
         );
 
-        totalHistoricalItems = [
-          ...totalHistoricalItems,
-          ...historical.data.items,
-        ];
+        const items = historical.data.items.filter((item: any) => {
+          if (item.holdings.length && item.holdings[0].quote_rate <= 100000) {
+            return item;
+          }
+        });
+
+        totalHistoricalItems = [...totalHistoricalItems, ...items];
       }
 
       const historicalTreasury = calcHistoricalPortfolio(totalHistoricalItems);
