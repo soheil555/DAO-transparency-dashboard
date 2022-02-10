@@ -48,7 +48,7 @@ DAO Transparency Dashboard powered by **Covalent API**.
 
    ```bash
    NEXT_PUBLIC_COVALENT_KEY= #get it from https://www.covalenthq.com/
-   CHROME_PATH= #not required if you don't want to update DAO data
+   CHROME_PATH= #not required if you don't want to update DAOs initial data
    DATABASE_URL= #postgres database url
    ```
 
