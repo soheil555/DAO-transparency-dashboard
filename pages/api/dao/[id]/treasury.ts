@@ -40,7 +40,7 @@ async function daoTreasuryRoute(req: NextApiRequest, res: NextApiResponse) {
       for (const address of dao.addresses) {
         const tokenBalances: TokenBalance[] = (
           await covalentEth.getTokenBalances!(address.address)
-        ).data.items;
+        ).data.data.items;
 
         for (const tokenBalance of tokenBalances) {
           const tokenExists = totalTokenBalances.find(

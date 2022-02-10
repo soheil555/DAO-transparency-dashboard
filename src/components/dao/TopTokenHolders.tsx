@@ -37,7 +37,7 @@ export default function TopTokenHolders() {
       covalentEth.getTokenHolders!(token.contract_address)
         .then((result) => {
           if (result) {
-            const items = result.data.items;
+            const items = result.data.data.items;
             dispatch({
               type: "SET_DAO_TOP_TOKEN_HOLDERS",
               payload: items,

@@ -1,21 +1,18 @@
 import axios from "axios";
-import { handleResponse, handleError } from "./response";
 
 const BASE_URL = "https://api.covalenthq.com/v1";
 const KEY = process.env.NEXT_PUBLIC_COVALENT_KEY;
 
 const getTokenBalances = (address: string, chainId: number) => {
-  return axios
-    .get(`${BASE_URL}/${chainId}/address/${address}/balances_v2/?key=${KEY}`)
-    .then(handleResponse)
-    .catch(handleError);
+  return axios.get(
+    `${BASE_URL}/${chainId}/address/${address}/balances_v2/?key=${KEY}`
+  );
 };
 
 const getHistoricalPortfolioValue = (address: string, chainId: number) => {
-  return axios
-    .get(`${BASE_URL}/${chainId}/address/${address}/portfolio_v2/?key=${KEY}`)
-    .then(handleResponse)
-    .catch(handleError);
+  return axios.get(
+    `${BASE_URL}/${chainId}/address/${address}/portfolio_v2/?key=${KEY}`
+  );
 };
 
 const getTokenHolders = (
@@ -24,12 +21,9 @@ const getTokenHolders = (
   pageNumber: number,
   pageSize: number
 ) => {
-  return axios
-    .get(
-      `${BASE_URL}/${chainId}/tokens/${address}/token_holders/?key=${KEY}&page-number=${pageNumber}&page-size=${pageSize}`
-    )
-    .then(handleResponse)
-    .catch(handleError);
+  return axios.get(
+    `${BASE_URL}/${chainId}/tokens/${address}/token_holders/?key=${KEY}&page-number=${pageNumber}&page-size=${pageSize}`
+  );
 };
 
 const getHistoricalTokenPrices = (

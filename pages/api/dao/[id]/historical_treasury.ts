@@ -82,7 +82,7 @@ async function daoHistoricalTreasuryRoute(
           address.address
         );
 
-        const items = historical.data.items.filter((item: any) => {
+        const items = historical.data.data.items.filter((item: any) => {
           if (item.holdings.length && item.holdings[0].quote_rate <= 100000) {
             return item;
           }
