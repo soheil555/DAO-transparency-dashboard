@@ -104,7 +104,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   if (!isNaN(Number(id))) {
     dao = await prisma.dAO.findFirst({
       where: { id: Number(id) },
-      include: { addresses: true },
     });
   }
 
