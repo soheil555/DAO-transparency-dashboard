@@ -33,6 +33,9 @@ type ActionType =
       payload: Treasury[];
     }
   | {
+      type: "DAO_TOP_TOKEN_HOLDERS_ERROR";
+    }
+  | {
       type: "SET_DAO_TOKEN_PRICES";
       payload: TokenPrice[];
     }
@@ -92,6 +95,7 @@ type StateType = {
   error?: Error;
   governance?: Governance;
   topTokenHolders?: TokenHolder[];
+  topTokenHoldersError?: boolean;
   historicalTreasury?: Treasury[];
   tokenPrices?: TokenPrice[];
 };
@@ -108,6 +112,7 @@ const initState: StateType = {
   topTokenHolders: undefined,
   historicalTreasury: undefined,
   tokenPrices: undefined,
+  topTokenHoldersError: false,
 };
 
 const daoReducer: Reducer<StateType, ActionType> = (
@@ -155,6 +160,12 @@ const daoReducer: Reducer<StateType, ActionType> = (
       return {
         ...state,
         topTokenHolders: action.payload,
+      };
+
+    case "DAO_TOP_TOKEN_HOLDERS_ERROR":
+      return {
+        ...state,
+        topTokenHoldersError: true,
       };
 
     case "SET_DAO_HISTORICAL_TREASURY":

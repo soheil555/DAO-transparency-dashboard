@@ -28,7 +28,7 @@ function calcHoldPercentage(_balance: string, _totalSupply: string) {
 }
 
 export default function TopTokenHolders() {
-  const { token, topTokenHolders } = useSelector(
+  const { token, topTokenHolders, topTokenHoldersError } = useSelector(
     (state: RootState) => state.dao
   );
   const dispatch = useDispatch();
@@ -42,6 +42,10 @@ export default function TopTokenHolders() {
             dispatch({
               type: "SET_DAO_TOP_TOKEN_HOLDERS",
               payload: items,
+            });
+          } else {
+            dispatch({
+              type: "DAO_TOP_TOKEN_HOLDERS_ERROR",
             });
           }
         })
@@ -103,6 +107,22 @@ export default function TopTokenHolders() {
               </Card>
             );
           })}
+        </Card>
+      ) : topTokenHoldersError ? (
+        <Card
+          sx={{
+            height: 250,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            textAlign: "center",
+          }}
+        >
+          {" "}
+          <Typography variant="h6" color="text.secondary">
+            API request failed. This cause the Transparency Score to show the
+            wrong result
+          </Typography>{" "}
         </Card>
       ) : (
         <Skeleton animation="wave" height={250} />

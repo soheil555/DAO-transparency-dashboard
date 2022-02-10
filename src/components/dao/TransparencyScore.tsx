@@ -50,8 +50,12 @@ function getTokenPricesScore(tokenPrices: TokenPrice[]) {
   return score;
 }
 
-function getTopTokenHoldersScore(topTokenHolders: TokenHolder[]) {
+function getTopTokenHoldersScore(topTokenHolders?: TokenHolder[]) {
   let score = 0;
+
+  if (!topTokenHolders) {
+    return score;
+  }
   const totalSupply = new BigNumber(topTokenHolders[0].total_supply);
 
   const balanceSum = new BigNumber(0);
@@ -114,6 +118,7 @@ export default function TransparencyScore() {
     treasury,
     tokenPrices,
     topTokenHolders,
+    topTokenHoldersError,
     historicalTreasury,
     governance,
   } = useSelector((state: RootState) => state.dao);
@@ -128,7 +133,7 @@ export default function TransparencyScore() {
     if (
       treasury &&
       tokenPrices &&
-      topTokenHolders &&
+      (topTokenHolders || topTokenHoldersError) &&
       historicalTreasury &&
       governance
     ) {
@@ -140,7 +145,14 @@ export default function TransparencyScore() {
 
       setScore(s1 + s2 + s3 + s4 + s5);
     }
-  }, [treasury, tokenPrices, topTokenHolders, historicalTreasury, governance]);
+  }, [
+    treasury,
+    tokenPrices,
+    topTokenHolders,
+    historicalTreasury,
+    governance,
+    topTokenHoldersError,
+  ]);
 
   return (
     <Paper

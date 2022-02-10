@@ -57,7 +57,6 @@ export default function Token() {
             payload: prices,
           });
 
-          console.log(prices);
           const [lastPrice, priceChange, color] = calcPriceChange(prices);
 
           setTokenPrice({
