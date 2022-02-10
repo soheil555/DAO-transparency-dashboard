@@ -1,4 +1,4 @@
-import { Container, Box } from "@mui/material";
+import { Container, Box, Typography } from "@mui/material";
 import type { NextPage } from "next";
 import SearchDAO from "src/components/index/SearchDAO";
 
@@ -14,6 +14,10 @@ const Home: NextPage = () => {
           alignItems: "center",
         }}
       >
+        <Typography variant="h2" component="div" color="primary" gutterBottom>
+          Search DAOS
+        </Typography>
+
         <SearchDAO />
       </Box>
     </Container>
