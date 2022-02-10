@@ -2,9 +2,7 @@
 
 DAO Transparency Dashboard powered by **Covalent API**.
 
-![](/home/soheil/projects/dao-transparency-dashboard/images/screenshot.png)
-
-
+![](images/screenshot.png)
 
 ## Tech Stack
 
@@ -15,16 +13,14 @@ DAO Transparency Dashboard powered by **Covalent API**.
 - Material UI
 - Prisma
 
-
-
 ## Running Locally
 
 1.  Clone the project
 
-   ```bash
-   git clone https://github.com/soheil555/DAO-transparency-dashboard.git
-   cd DAO-transparency-dashboard
-   ```
+```bash
+git clone https://github.com/soheil555/DAO-transparency-dashboard.git
+cd DAO-transparency-dashboard
+```
 
 2. Create .`env` file
 
@@ -54,21 +50,12 @@ DAO Transparency Dashboard powered by **Covalent API**.
    npm run dev
    ```
 
-
-
-
-
 ## DAOs Initial Informations
 
 DAO name, description, treasury and governance addresses are scraped from [DeepDAO.io](https://deepdao.io/) Top organizations list.
 
 Scraping script can be found in `prisma/seed.ts` file.
 
-
-
-
-
 ## License
 
 Available under the MIT license. See the `LICENSE` file for more info.
-
