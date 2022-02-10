@@ -43,9 +43,10 @@ export default function Currencies() {
         (item: Item) =>
           item.contract_name.toLowerCase().includes(daoName) ||
           item.contract_ticker_symbol.toLowerCase().includes(daoName) ||
-          item.contract_ticker_symbol
-            .toLowerCase()
-            .includes(governance.symbol.toLowerCase())
+          (governance.symbol &&
+            item.contract_ticker_symbol
+              .toLowerCase()
+              .includes(governance.symbol.toLowerCase()))
       );
 
       let daoToken: Item | undefined;
@@ -80,6 +81,10 @@ export default function Currencies() {
             contract_address: daoToken.contract_address,
             logoUrl: daoToken.logo_url,
           },
+        });
+      } else {
+        dispatch({
+          type: "SET_DAO_TOKEN_NOT_FOUND",
         });
       }
     }

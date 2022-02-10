@@ -29,7 +29,7 @@ function calcPriceChange(prices: Price[]) {
 
 export default function Token() {
   const dispatch = useDispatch();
-  const { token } = useSelector((state: RootState) => state.dao);
+  const { token, tokenNotFound } = useSelector((state: RootState) => state.dao);
 
   const [tokenPrice, setTokenPrice] = useState<TokenPrice | null>(null);
 
@@ -82,60 +82,86 @@ export default function Token() {
       <CardContent>
         <Title>DAO Token</Title>
 
-        <Box component="div">
-          {token ? (
-            <Box
-              component="div"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 10,
-              }}
-            >
-              <img
-                loading="lazy"
-                onError={({ currentTarget }) => {
-                  currentTarget.onerror = null;
-                  currentTarget.src = "/default_token.png";
-                }}
-                style={{
-                  height: "2.5rem",
-                  objectFit: "contain",
-                }}
-                src={token.logoUrl}
-              />
-              <Typography variant="h3" component="div">
-                {token.contract_ticker_symbol}
-              </Typography>
+        {!tokenNotFound ? (
+          <>
+            <Box component="div">
+              {token ? (
+                <Box
+                  component="div"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 10,
+                  }}
+                >
+                  <img
+                    loading="lazy"
+                    onError={({ currentTarget }) => {
+                      currentTarget.onerror = null;
+                      currentTarget.src = "/default_token.png";
+                    }}
+                    style={{
+                      height: "2.5rem",
+                      objectFit: "contain",
+                    }}
+                    src={token.logoUrl}
+                  />
+                  <Typography variant="h3" component="div">
+                    {token.contract_ticker_symbol}
+                  </Typography>
+                </Box>
+              ) : (
+                <Skeleton />
+              )}
             </Box>
-          ) : (
-            <Skeleton />
-          )}
-        </Box>
 
-        <Typography sx={{ fontSize: 18 }} color="text.secondary" gutterBottom>
-          Token Price
-        </Typography>
+            <Typography
+              sx={{ fontSize: 18 }}
+              color="text.secondary"
+              gutterBottom
+            >
+              Token Price
+            </Typography>
 
-        <Typography variant="h3" component="div">
-          {tokenPrice ? "$" + tokenPrice.lastPrice : <Skeleton />}
-        </Typography>
+            <Typography variant="h3" component="div">
+              {tokenPrice ? "$" + tokenPrice.lastPrice : <Skeleton />}
+            </Typography>
 
-        <Typography sx={{ fontSize: 18 }} color="text.secondary" gutterBottom>
-          Price changes over last month
-        </Typography>
+            <Typography
+              sx={{ fontSize: 18 }}
+              color="text.secondary"
+              gutterBottom
+            >
+              Price changes over last month
+            </Typography>
 
-        <Typography variant="h3" component="div">
-          {tokenPrice ? (
-            <>
-              <Box component="span" color={tokenPrice.color as string}>
-                ${tokenPrice.priceChange}
-              </Box>
-            </>
-          ) : (
-            <Skeleton />
-          )}
-        </Typography>
+            <Typography variant="h3" component="div">
+              {tokenPrice ? (
+                <>
+                  <Box component="span" color={tokenPrice.color as string}>
+                    ${tokenPrice.priceChange}
+                  </Box>
+                </>
+              ) : (
+                <Skeleton />
+              )}
+            </Typography>
+          </>
+        ) : (
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              textAlign: "center",
+              height: "12rem",
+            }}
+          >
+            <Typography color="text.secondary">
+              DAO Token not found. This cause the Transparency score to show the
+              wrong result.
+            </Typography>
+          </Box>
+        )}
       </CardContent>
     </Card>
   );

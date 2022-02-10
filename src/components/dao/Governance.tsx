@@ -1,4 +1,4 @@
-import { Card, CardContent, Typography, Skeleton } from "@mui/material";
+import { Card, CardContent, Typography, Skeleton, Box } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "redux/store";
 import { useEffect } from "react";
@@ -42,29 +42,51 @@ export default function Governance() {
         <CardContent>
           <Title>Snapshot Governance</Title>
 
-          <Typography
-            sx={{ fontSize: 18, marginTop: 3 }}
-            color="text.secondary"
-            gutterBottom
-          >
-            Proposals Count
-          </Typography>
-
-          <Typography component="div" variant="h3" gutterBottom>
-            {governance ? governance.proposalsCount : <Skeleton />}
-          </Typography>
-
-          <Typography sx={{ fontSize: 18 }} color="text.secondary" gutterBottom>
-            Followers Count
-          </Typography>
-
-          <Typography component="div" variant="h3">
-            {governance ? (
-              convertToInternationalCurrencySystem(governance.followersCount)
+          {governance ? (
+            governance.name != undefined ? (
+              <>
+                <Typography
+                  sx={{ fontSize: 18, marginTop: 3 }}
+                  color="text.secondary"
+                  gutterBottom
+                >
+                  Proposals Count
+                </Typography>
+                <Typography component="div" variant="h3" gutterBottom>
+                  {governance.proposalsCount}
+                </Typography>
+                <Typography
+                  sx={{ fontSize: 18 }}
+                  color="text.secondary"
+                  gutterBottom
+                >
+                  Followers Count
+                </Typography>
+                <Typography component="div" variant="h3">
+                  {convertToInternationalCurrencySystem(
+                    governance.followersCount
+                  )}
+                </Typography>
+              </>
             ) : (
-              <Skeleton />
-            )}
-          </Typography>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  height: "13rem",
+                  textAlign: "center",
+                }}
+              >
+                <Typography color="text.secondary">
+                  SnapShot governance not found. This cause the Transparency
+                  Score to show the wrong result
+                </Typography>
+              </Box>
+            )
+          ) : (
+            <Skeleton height={200} />
+          )}
         </CardContent>
       </Card>
     </>

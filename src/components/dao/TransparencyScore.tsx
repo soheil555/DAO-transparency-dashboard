@@ -27,8 +27,12 @@ function getTreasuryScore(treasury: number) {
   return score;
 }
 
-function getTokenPricesScore(tokenPrices: TokenPrice[]) {
+function getTokenPricesScore(tokenPrices?: TokenPrice[]) {
   let score = 0;
+
+  if (!tokenPrices) {
+    return score;
+  }
 
   let oldPrice = tokenPrices[tokenPrices.length - 1];
   let lastPrice = tokenPrices[0];
@@ -121,6 +125,7 @@ export default function TransparencyScore() {
     topTokenHoldersError,
     historicalTreasury,
     governance,
+    tokenNotFound,
   } = useSelector((state: RootState) => state.dao);
 
   useEffect(() => {
@@ -132,8 +137,8 @@ export default function TransparencyScore() {
 
     if (
       treasury &&
-      tokenPrices &&
-      (topTokenHolders || topTokenHoldersError) &&
+      (tokenPrices || tokenNotFound) &&
+      (topTokenHolders || topTokenHoldersError || tokenNotFound) &&
       historicalTreasury &&
       governance
     ) {
@@ -152,6 +157,7 @@ export default function TransparencyScore() {
     historicalTreasury,
     governance,
     topTokenHoldersError,
+    tokenNotFound,
   ]);
 
   return (

@@ -28,9 +28,8 @@ function calcHoldPercentage(_balance: string, _totalSupply: string) {
 }
 
 export default function TopTokenHolders() {
-  const { token, topTokenHolders, topTokenHoldersError } = useSelector(
-    (state: RootState) => state.dao
-  );
+  const { token, topTokenHolders, topTokenHoldersError, tokenNotFound } =
+    useSelector((state: RootState) => state.dao);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -108,7 +107,7 @@ export default function TopTokenHolders() {
             );
           })}
         </Card>
-      ) : topTokenHoldersError ? (
+      ) : topTokenHoldersError || tokenNotFound ? (
         <Card
           sx={{
             height: 250,
@@ -120,8 +119,8 @@ export default function TopTokenHolders() {
         >
           {" "}
           <Typography variant="h6" color="text.secondary">
-            API request failed. This cause the Transparency Score to show the
-            wrong result
+            {tokenNotFound ? "DAO Token not found" : "API request failed"}. This
+            cause the Transparency Score to show the wrong result
           </Typography>{" "}
         </Card>
       ) : (

@@ -29,6 +29,9 @@ type ActionType =
       payload: TokenHolder[];
     }
   | {
+      type: "SET_DAO_TOKEN_NOT_FOUND";
+    }
+  | {
       type: "SET_DAO_HISTORICAL_TREASURY";
       payload: Treasury[];
     }
@@ -98,6 +101,7 @@ type StateType = {
   topTokenHoldersError?: boolean;
   historicalTreasury?: Treasury[];
   tokenPrices?: TokenPrice[];
+  tokenNotFound?: boolean;
 };
 
 const initState: StateType = {
@@ -113,6 +117,7 @@ const initState: StateType = {
   historicalTreasury: undefined,
   tokenPrices: undefined,
   topTokenHoldersError: false,
+  tokenNotFound: false,
 };
 
 const daoReducer: Reducer<StateType, ActionType> = (
@@ -143,6 +148,12 @@ const daoReducer: Reducer<StateType, ActionType> = (
           contract_address: action.payload.contract_address,
           logoUrl: action.payload.logoUrl,
         },
+      };
+
+    case "SET_DAO_TOKEN_NOT_FOUND":
+      return {
+        ...state,
+        tokenNotFound: true,
       };
 
     case "SET_DAO_GOVERNANCE":
