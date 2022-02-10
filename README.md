@@ -1,34 +1,74 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## DAO Transparency Dashboard
 
-## Getting Started
+DAO Transparency Dashboard powered by **Covalent API**.
 
-First, run the development server:
+![](/home/soheil/projects/dao-transparency-dashboard/images/screenshot.png)
 
-```bash
-npm run dev
-# or
-yarn dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Tech Stack
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+- Typescript
+- Nextjs
+- Reactjs
+- Redux
+- Material UI
+- Prisma
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+## Running Locally
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1.  Clone the project
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+   ```bash
+   git clone https://github.com/soheil555/DAO-transparency-dashboard.git
+   cd DAO-transparency-dashboard
+   ```
 
-## Deploy on Vercel
+2. Create .`env` file
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   ```bash
+   cp .env.example .env
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+3. Edit `.env` file
+
+   ```bash
+   NEXT_PUBLIC_COVALENT_KEY= #get it from https://www.covalenthq.com/
+   CHROME_PATH= #not required if you don't want to update DAO data
+   DATABASE_URL= #postgres database url
+   ```
+
+   > By default project uses Postgres as database for storing DAOs initial informations. But you can change it to any Prisma supported databases by editing `prisma/schema.prisma` file.
+
+4. Install dependencies and seed database
+
+   ```bash
+   npm run install-seed
+   ```
+
+5. Start development server
+
+   ```bash
+   npm run dev
+   ```
+
+
+
+
+
+## DAOs Initial Informations
+
+DAO name, description, treasury and governance addresses are scraped from [DeepDAO.io](https://deepdao.io/) Top organizations list.
+
+Scraping script can be found in `prisma/seed.ts` file.
+
+
+
+
+
+## License
+
+Available under the MIT license. See the `LICENSE` file for more info.
+
