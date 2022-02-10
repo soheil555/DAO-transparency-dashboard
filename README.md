@@ -12,6 +12,12 @@ DAO Transparency Dashboard powered by **Covalent API**.
 
 
 
+## Working App
+
+> Sometimes API requests fail in Vercel.
+
+- https://dao-transparency-dashboard.vercel.app/
+
 
 
 ## Tech Stack
@@ -46,7 +52,7 @@ DAO Transparency Dashboard powered by **Covalent API**.
    DATABASE_URL= #postgres database url
    ```
 
-   > By default project uses Postgres as database for storing DAOs initial informations. But you can change it to any Prisma supported databases by editing `prisma/schema.prisma` file.
+   > By default, the project uses Postgres as the database for storing DAOs initial information. But you can change it to any database that Prisma supported  by editing `prisma/schema.prisma` file.
 
 4. Install dependencies and seed database
 
