@@ -1,14 +1,8 @@
 import { Container, Box } from "@mui/material";
-import type { NextPage, GetServerSideProps } from "next";
+import type { NextPage } from "next";
 import SearchDAO from "src/components/index/SearchDAO";
-import prisma from "prisma/client";
-import { DAO } from "prisma/seed";
 
-interface Props {
-  daos: DAO[];
-}
-
-const Home: NextPage<Props> = ({ daos }) => {
+const Home: NextPage = () => {
   return (
     <Container maxWidth="lg">
       <Box
@@ -20,18 +14,10 @@ const Home: NextPage<Props> = ({ daos }) => {
           alignItems: "center",
         }}
       >
-        <SearchDAO daos={daos} />
+        <SearchDAO />
       </Box>
     </Container>
   );
-};
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const daos = await prisma.dAO.findMany();
-
-  return {
-    props: { daos },
-  };
 };
 
 export default Home;

@@ -1,16 +1,37 @@
-import { Box, TextField, Autocomplete } from "@mui/material";
-import { useState } from "react";
+import { Box, TextField, Autocomplete, CircularProgress } from "@mui/material";
+import { useState, useEffect, Fragment } from "react";
 import { DAO as DAOType } from "prisma/seed";
 import { LoadingButton } from "@mui/lab";
 import { ArrowRightAlt } from "@mui/icons-material";
+import axios from "axios";
 
-interface Props {
-  daos: DAOType[];
-}
-
-export default function SearchDAO({ daos }: Props) {
+export default function SearchDAO() {
   const [dao, setDAO] = useState<DAOType | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [daos, setDAOS] = useState<readonly DAOType[]>([]);
+  const [open, setOpen] = useState(false);
+  const [analyzeLoading, setAnalyzeLoading] = useState(false);
+
+  const loading = open && daos.length === 0;
+
+  useEffect(() => {
+    let active = true;
+
+    if (!loading) {
+      return undefined;
+    }
+
+    (async () => {
+      const result = await axios.get("/api/dao");
+
+      if (active) {
+        setDAOS(result.data);
+      }
+    })();
+
+    return () => {
+      active = false;
+    };
+  }, [loading]);
 
   return (
     <Box
@@ -26,12 +47,34 @@ export default function SearchDAO({ daos }: Props) {
         onChange={(event: any, value: DAOType | null) => {
           setDAO(value);
         }}
+        onOpen={() => {
+          setOpen(true);
+        }}
+        onClose={() => {
+          setOpen(false);
+        }}
         disablePortal
         options={daos}
         fullWidth
         sx={{ mr: 2 }}
         getOptionLabel={(option) => option.name}
-        renderInput={(params) => <TextField {...params} label="Search DAOS" />}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            label="Search DAOS"
+            InputProps={{
+              ...params.InputProps,
+              endAdornment: (
+                <Fragment>
+                  {loading ? (
+                    <CircularProgress color="inherit" size={20} />
+                  ) : null}
+                  {params.InputProps.endAdornment}
+                </Fragment>
+              ),
+            }}
+          />
+        )}
         renderOption={(props, option) => (
           <Box
             component="li"
@@ -57,11 +100,11 @@ export default function SearchDAO({ daos }: Props) {
         variant="contained"
         size="small"
         onClick={() => {
-          setLoading(true);
+          setAnalyzeLoading(true);
         }}
-        loading={loading}
+        loading={analyzeLoading}
         loadingPosition="end"
-        disabled={loading || !dao}
+        disabled={analyzeLoading || !dao}
       >
         Start Analayze
       </LoadingButton>

@@ -20,10 +20,9 @@ import SearchDAO from "src/components/dao/SearchDAO";
 
 interface Props {
   dao: DAO;
-  daos: DAO[];
 }
 
-const DAO: NextPage<Props> = ({ dao, daos }) => {
+const DAO: NextPage<Props> = ({ dao }) => {
   const dispatch = useDispatch();
   const [daoLoaded, setDaoLoaded] = useState(false);
   const { error } = useSelector((state: RootState) => state.dao);
@@ -51,7 +50,7 @@ const DAO: NextPage<Props> = ({ dao, daos }) => {
           <Box sx={{ flexGrow: 1 }}>
             <Grid container spacing={2} justifyContent="center">
               <Grid item xs={12} md={8}>
-                <SearchDAO daos={daos} />
+                <SearchDAO />
               </Grid>
 
               <Grid item xs={12}>
@@ -115,10 +114,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 
-  const daos = await prisma.dAO.findMany();
-
   return {
-    props: { dao, daos },
+    props: { dao },
   };
 };
 
