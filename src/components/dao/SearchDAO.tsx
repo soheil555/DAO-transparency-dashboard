@@ -53,6 +53,7 @@ export default function SearchDAO() {
         onClose={() => {
           setOpen(false);
         }}
+        loading={loading}
         disablePortal
         options={daos}
         fullWidth

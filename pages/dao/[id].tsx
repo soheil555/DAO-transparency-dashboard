@@ -1,5 +1,5 @@
-import type { NextPage, GetServerSideProps } from "next";
-import { Container, Box, Grid } from "@mui/material";
+import type { NextPage } from "next";
+import { Container, Box, Grid, CircularProgress } from "@mui/material";
 import Currencies from "src/components/dao/Currencies";
 import Treasury from "src/components/dao/Treasury";
 import Info from "src/components/dao/Info";
@@ -8,7 +8,6 @@ import TopTokenHolders from "src/components/dao/TopTokenHolders";
 import Token from "src/components/dao/Token";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import prisma from "prisma/client";
 import { DAO } from "prisma/seed";
 import { useState } from "react";
 import { useSelector } from "react-redux";
@@ -17,31 +16,44 @@ import Error from "src/components/dao/Error";
 import Governance from "src/components/dao/Governance";
 import TransparencyScore from "src/components/dao/TransparencyScore";
 import SearchDAO from "src/components/dao/SearchDAO";
+import { useRouter } from "next/router";
+import axios from "axios";
 
-interface Props {
-  dao: DAO;
-}
-
-const DAO: NextPage<Props> = ({ dao }) => {
+const DAO: NextPage = () => {
   const dispatch = useDispatch();
   const [daoLoaded, setDaoLoaded] = useState(false);
   const { error } = useSelector((state: RootState) => state.dao);
+  const router = useRouter();
+  const { id } = router.query;
 
   useEffect(() => {
+    if (!id) {
+      return undefined;
+    }
+
     dispatch({ type: "RESET_DAO" });
 
-    dispatch({
-      type: "SET_DAO_INFO",
-      payload: {
-        id: dao.id,
-        name: dao.name,
-        description: dao.description,
-        logo: dao.logoUrl,
-      },
-    });
+    axios
+      .get(`/api/dao/${id}`)
+      .then((result) => {
+        const dao = result.data;
 
-    setDaoLoaded(true);
-  }, []);
+        dispatch({
+          type: "SET_DAO_INFO",
+          payload: {
+            id: dao.id,
+            name: dao.name,
+            description: dao.description,
+            logo: dao.logoUrl,
+          },
+        });
+
+        setDaoLoaded(true);
+      })
+      .catch((error) => {
+        router.push("/");
+      });
+  }, [id]);
 
   return (
     <>
@@ -90,32 +102,22 @@ const DAO: NextPage<Props> = ({ dao }) => {
           {error && <Error message={error.message} />}
         </Container>
       ) : (
-        ""
+        <Box
+          sx={{
+            position: "absolute",
+            width: "100%",
+            height: "100%",
+            backgroundColor: "white",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <CircularProgress size={50} />
+        </Box>
       )}
     </>
   );
-};
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { id } = context.query;
-
-  let dao = undefined;
-
-  if (!isNaN(Number(id))) {
-    dao = await prisma.dAO.findFirst({
-      where: { id: Number(id) },
-    });
-  }
-
-  if (!dao) {
-    return {
-      notFound: true,
-    };
-  }
-
-  return {
-    props: { dao },
-  };
 };
 
 export default DAO;
