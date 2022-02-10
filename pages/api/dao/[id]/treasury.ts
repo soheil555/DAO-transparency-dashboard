@@ -53,13 +53,8 @@ async function daoTreasuryRoute(req: NextApiRequest, res: NextApiResponse) {
             tokenBalance.quote_rate! <= 0 ||
             tokenBalance.quote <= 0
           ) {
-            console.log(tokenBalance);
             continue;
           }
-
-          // console.log("********************");
-          // console.log(tokenBalance);
-          // console.log("********************");
 
           treasury += tokenBalance.quote;
 

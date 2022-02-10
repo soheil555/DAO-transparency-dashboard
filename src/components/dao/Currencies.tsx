@@ -39,8 +39,10 @@ export default function Currencies() {
     if (name && items) {
       const daoName = name.toLowerCase().replace("dao", "").trim();
 
-      const daoTokens = items.filter((item: Item) =>
-        item.contract_name.toLowerCase().includes(daoName)
+      const daoTokens = items.filter(
+        (item: Item) =>
+          item.contract_name.toLowerCase().includes(daoName) ||
+          item.contract_ticker_symbol.toLowerCase().includes(daoName)
       );
 
       let daoToken: Item | undefined;

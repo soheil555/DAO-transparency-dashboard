@@ -21,10 +21,6 @@ function calcHistoricalPortfolio(items: Item[]) {
   } = {};
 
   for (const item of items) {
-    // console.log("********************");
-    // console.log(item);
-    // console.log("********************");
-
     for (const holding of item.holdings) {
       if (data[holding.timestamp]) {
         data[holding.timestamp] += holding.close.quote;
