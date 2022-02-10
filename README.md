@@ -4,6 +4,16 @@ DAO Transparency Dashboard powered by **Covalent API**.
 
 ![](images/screenshot.png)
 
+
+
+## Demo video
+
+- https://youtu.be/vyJyNUlURGc
+
+
+
+
+
 ## Tech Stack
 
 - Typescript
