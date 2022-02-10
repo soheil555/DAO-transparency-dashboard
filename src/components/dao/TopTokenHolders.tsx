@@ -42,19 +42,25 @@ export default function TopTokenHolders() {
               type: "SET_DAO_TOP_TOKEN_HOLDERS",
               payload: items,
             });
-          } else {
-            dispatch({
-              type: "DAO_TOP_TOKEN_HOLDERS_ERROR",
-            });
           }
         })
         .catch((error) => {
-          dispatch({
-            type: "SET_ERROR",
-            payload: {
-              message: "Failed to get token holders. Please refresh page.",
-            },
-          });
+          if (
+            error.response.data.error_message.includes(
+              "time out; not attempting"
+            )
+          ) {
+            dispatch({
+              type: "DAO_TOP_TOKEN_HOLDERS_ERROR",
+            });
+          } else {
+            dispatch({
+              type: "SET_ERROR",
+              payload: {
+                message: "Failed to get token holders. Please refresh page.",
+              },
+            });
+          }
         });
     }
   }, [token]);
@@ -119,8 +125,10 @@ export default function TopTokenHolders() {
         >
           {" "}
           <Typography variant="h6" color="text.secondary">
-            {tokenNotFound ? "DAO Token not found" : "API request failed"}. This
-            cause the Transparency Score to show the wrong result
+            {tokenNotFound
+              ? "DAO Token not found"
+              : "API request failed 'time out; not attempting.'"}{" "}
+            This cause the Transparency Score to show the wrong result
           </Typography>{" "}
         </Card>
       ) : (

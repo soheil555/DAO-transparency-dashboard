@@ -29,8 +29,6 @@ export default function HistoricalPortfolio() {
   );
 
   useEffect(() => {
-    console.log("here historical");
-
     axios
       .get(`/api/dao/${id}/historical_treasury`)
       .then((result) => {
@@ -40,7 +38,7 @@ export default function HistoricalPortfolio() {
         });
       })
       .catch((error) => {
-        if (count < 5) {
+        if (count < 7) {
           setTimeout(() => {
             setCount(count + 1);
           }, 300);

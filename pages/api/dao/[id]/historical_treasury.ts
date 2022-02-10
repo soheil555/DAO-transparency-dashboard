@@ -75,19 +75,6 @@ async function daoHistoricalTreasuryRoute(
 
       let totalHistoricalItems: Item[] = [];
 
-      const retryToComplete: (address: string) => any = async (
-        address: string
-      ) => {
-        let historical: any;
-        try {
-          historical = await covalentEth.getHistoricalPortfolioValue!(address);
-        } catch (error) {
-          return await retryToComplete(address);
-        }
-
-        return historical;
-      };
-
       for (const address of dao.addresses) {
         let historical = await covalentEth.getHistoricalPortfolioValue!(
           address.address
