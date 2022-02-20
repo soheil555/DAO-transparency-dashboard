@@ -50,7 +50,7 @@ export default function Token() {
         now
       )
         .then((result) => {
-          const prices = result.data.data.prices[0].prices;
+          const prices = result.data.data[0].prices;
 
           dispatch({
             type: "SET_DAO_TOKEN_PRICES",
