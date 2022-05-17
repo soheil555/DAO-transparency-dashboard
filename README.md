@@ -14,8 +14,6 @@ DAO Transparency Dashboard powered by **Covalent API**.
 
 ## Working App
 
-> Sometimes API requests fail in Vercel.
-
 - https://dao-transparency-dashboard.vercel.app/
 
 
